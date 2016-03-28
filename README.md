@@ -1,4 +1,6 @@
-This is a very basic Ruby on Rails template, utilizing Bootstrap with SASS and one controller called Welcome.
+This is a very basic Ruby on Rails template, utilizing PostgreSQL for the database and Bootstrap with SASS for the front end. 
+
+Also includes one controller called Welcome.
 
 Note that /app/assets/stylesheets/welcome.scss contains the body padding for the Jumbotron; all controllers using the Jumbotron should have that body padding code.
 
