@@ -1,0 +1,74 @@
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">PayME</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+        	<ul class="nav navbar-nav">
+            <li class="active"><a href="/">Home</a></li>
+           
+          </ul>
+          <form class="navbar-form navbar-right" action="/sessions" method="post">
+            <%= token_tag nil %>
+            <div class="form-group">
+              <input type="text" name="session[email]" class="form-control" placeholder="Email">
+            </div>
+            <div class="form-group">
+              <input type="password" name="session[password]" class="form-control" placeholder="Password">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Welcome to PayMe</h1>
+        <div class="row fit">
+          <div class="col-md-4 fit">
+            <h3>Invoice App</h3>
+            <p>This is an invoice App. -----Description-----</p>
+            <p><a class="btn btn-primary btn-md" href="#" role="button">Learn more &raquo;</a></p>
+          </div>
+
+          <div class="col-md-4 fit">
+            <h3>Register</h3>
+            <form action="/companies" method="post">
+              <%= token_tag nil %>
+              <p>
+              <input type="text" name="company[name]" placeholder="Company Name" />
+              </p>
+              <input type="text" name="company[address_line1]" placeholder="Address 1" />
+              <input type="text" name="company[address_line2]" placeholder="Address 2" />
+              <input type="text" name="company[city]" placeholder="City" />
+              <input type="text" name="company[state]" placeholder="State" />
+              <input type="text" name="company[zip]" placeholder="Zipcode" />
+              <p></p>
+              <input type="text" name="company[phone]" placeholder="Phone Number" />
+              <input type="text" name="company[email]" placeholder="Email" />
+              <p></p>
+              <input type="password" name="company[password]" placeholder="Password" />
+              <input type="password" name="company[password_confirmation]" placeholder="Password Confirmation" />
+              <p></p>
+              <button type="submit" class="btn btn-primary btn-md"> Sign Me Up! &raquo;</button>
+            </form>
+          </div>
+        </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2016 PayMe</p>
+      </footer>
+      </div> <!-- /container -->
+    </div><!-- /jumbotron -->
+
+

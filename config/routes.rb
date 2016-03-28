@@ -1,5 +1,22 @@
 Rails.application.routes.draw do
-  root 'welcome#index'
+  get 'clients/index'
+
+  get 'clients/new'
+
+  get 'clients/edit'
+
+  get 'clients/create'
+
+  get 'clients/update'
+
+  get 'clients/show'
+
+  get 'clients/destroy'
+
+  resources :sessions
+  resources :companies
+
+  root 'sessions#index'
 
   get '/elements' => 'welcome#elements'
 
