@@ -11,9 +11,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 20160328202822) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "clients", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.integer  "phone"
+    t.string   "email"
+    t.string   "password_digest"
+    t.integer  "company_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "clients", ["company_id"], name: "index_clients_on_company_id", using: :btree
+
+  create_table "companies", force: :cascade do |t|
+    t.string   "name"
+    t.string   "address_line1"
+    t.string   "address_line2"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.integer  "phone"
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  create_table "invoices", force: :cascade do |t|
+    t.integer  "client_id"
+    t.integer  "company_id"
+    t.date     "send"
+    t.date     "due_by"
+    t.text     "description"
+    t.float    "amount"
+    t.string   "stripe_payment"
+    t.integer  "check_payment"
+    t.date     "paid_date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "invoices", ["client_id"], name: "index_invoices_on_client_id", using: :btree
+  add_index "invoices", ["company_id"], name: "index_invoices_on_company_id", using: :btree
+
+  add_foreign_key "clients", "companies"
+  add_foreign_key "invoices", "clients"
+  add_foreign_key "invoices", "companies"
 end
