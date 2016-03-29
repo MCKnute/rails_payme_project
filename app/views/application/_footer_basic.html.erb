@@ -1,5 +1,16 @@
      
 	<hr />
+<!-- DELETE BEFORE DEPLOYMENT -->
+	<form action='/sessions' method='post' class="navbar-form navbar-right">
+            
+             <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+             <input type="hidden" name="_method" value="delete">
+             <div class="form-group">
+               <strong class="text-muted">Fail Safe (SESSION CLEAR) </strong>
+               <button type='submit' value='Log Out' class="btn btn-sm btn-default">Sign Out</button>
+             </div>
+    </form> 
+<!-- end -->
       <footer>
         <p>&copy; 2016 Pete Kang, Mollie Knute, Garrick Kwong, and Ryan Reyes</p>
       </footer>
