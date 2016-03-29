@@ -1,0 +1,42 @@
+   </div>
+    <div class="jumbotron">
+      <div class="container">
+        <h1>Welcome to PayMe</h1>
+        <div class="row fit">
+          <div class="col-md-6 fit">
+            <h3>Invoice App</h3>
+            <p>This is an invoice App. -----Description-----</p>
+            <p><a class="btn btn-primary btn-md" href="#" role="button">Learn more &raquo;</a></p>
+          </div>
+
+          <div class="col-md-6 fit">
+            <h3>Register</h3>
+            <form action="/companies" method="post">
+              <%= token_tag nil %>
+              <p>
+              <input type="text" name="company[name]" placeholder="Company Name" />
+              </p>
+              <input type="text" name="company[address_line1]" placeholder="Address 1" /> <br />
+              <input type="text" name="company[address_line2]" placeholder="Address 2" /> <br />
+              <input type="text" name="company[city]" placeholder="City" /> <br />
+              <input type="text" name="company[state]" placeholder="State" /> <br />
+              <input type="text" name="company[zip]" placeholder="Zipcode" />
+              <br />
+              <input type="text" name="company[phone]" placeholder="Phone Number" />
+              <br />
+              <input type="text" name="company[email]" placeholder="Email" />
+              <p></p>
+              <input type="password" name="company[password]" placeholder="Password" />
+              <br />
+              <input type="password" name="company[password_confirmation]" placeholder="Password Confirmation" />
+              <br />
+              <button type="submit" class="btn btn-primary btn-lg"> Sign Me Up! &raquo;</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      
+
+

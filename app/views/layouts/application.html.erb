@@ -1,18 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <title>PayME - Invoicing App</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <meta charset="UTF-8" />
   <%= csrf_meta_tags %>
 </head>
 <body>
 
   <%= render 'nav_basic.html.erb' %>
 
+    
+
     <%= yield %>
 
   <%= render 'footer_basic.html.erb' %>
+
 
 
 <!-- Bootstrap core JavaScript

@@ -1,5 +1,26 @@
 Rails.application.routes.draw do
   root 'welcome#index'
+  
+  get 'clients/index'
+
+  get 'clients/new'
+
+  get 'clients/edit'
+
+  get 'clients/create'
+
+  get 'clients/update'
+
+  get 'clients/show'
+
+  get 'clients/destroy'
+
+  resources :companies
+
+  get '/register' => 'companies#new', as: :this_new_company
+  
+  post '/sessions' => 'sessions#create'
+  delete '/sessions' => 'sessions#destroy'
 
   get '/elements' => 'welcome#elements'
 
