@@ -3,7 +3,7 @@ class CreateInvoices < ActiveRecord::Migration
     create_table :invoices do |t|
       t.references :client, index: true, foreign_key: true
       t.references :company, index: true, foreign_key: true
-      t.date :send
+      t.date :sendDate
       t.date :due_by
       t.text :description
       t.float :amount
