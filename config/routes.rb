@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  # get 'clients' => 'clients#show'
+
+  get "clients/:id" => "clients#show"
+
+  post 'clients/create' => 'clients#create'
+
+  get 'companies/clients/new' => 'clients#new'
+  
+  post 'clients' => 'clients#create'
+  
+  get 'clients/:id' => 'clients#show'
+
+  get 'clients/update'
+
   root 'welcome#index'
 
   get '/register' => 'companies#new', as: :this_new_company
@@ -11,7 +25,7 @@ Rails.application.routes.draw do
 
   resources :companies
 
-  resources :clients
+  # resources :clients
 
   resources :dashboards
 

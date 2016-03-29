@@ -1,3 +1,4 @@
+
 <h1>Clients#show</h1>
 <p>Find me in app/views/clients/show.html.erb</p>
 
@@ -77,3 +78,66 @@
 				    </div>
 				</div>
 			</div> 
+
+<div id="container">
+	<h4>Client Info:</h4>
+
+	<h4><%= @client.name %></h4>
+	<h4><%= @client.address_line1 %></h4>	
+	<% if @client.address_line2 %>
+		<h4><%= @client.address_line2 %></h4>
+	<% end %>
+	<h4><%= @client.city %>, <%= @client.state %> <%= @client.zip %></h4>
+
+	<h4>Outstanding Invoices</h4>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Company Name</th>
+				<th>Description</th>
+				<th>Amount</th>
+				<th>Send Date</th>
+				<th>Due By Date</th>
+				<th>Pay</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @out.each do |out| %>
+				<tr>
+					<td><%= out.company.name %></td>
+					<td><%= out.description %></td>
+					<td>$<%= out.amount %></td>
+					<td><%= out.sendDate%></td>
+					<td><%= out.due_by%></td>
+					<td>
+						<button>By Stripe</button>
+						<button>By Check</button>
+					</td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+
+	<h4>Paid Invoices</h4>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<th>Company Name</th>
+				<th>Description</th>
+				<th>Amount</th>
+				<th>Paid Date</th>
+
+			</tr>
+		</thead>
+		<tbody>
+			<% @paid.each do |paid| %>
+				<tr>
+					<td><%= paid.company.name %></td>
+					<td><%= paid.description %></td>
+					<td>$<%= paid.amount %></td>
+					<td><%= paid.paid_date %></td>
+				</tr>
+			<% end %>
+		</tbody>
+	</table>
+</div>
