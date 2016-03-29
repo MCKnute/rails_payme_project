@@ -1,0 +1,21 @@
+<h1>Listing of all Paid Invoices</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<td>Client Name</td>
+			<td>Amount Paid</td>
+			<td>Date Paid</td>
+		</tr>
+	</thead>
+	<tbody>
+		<% if @paidvoices %>
+			<% @paidvoices.each do |paid| %></td>
+		<tr>
+			<td><%= paid.client.name %></td>
+			<td><%= paid.amount %></td>
+			<td><%= paid.paid_date %></td>
+		</tr>
+	</tbody>
+	<% end %>
+<% end %>
+</table>
