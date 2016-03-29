@@ -8,19 +8,9 @@ Rails.application.routes.draw do
   
   get 'clients' => 'clients#index'
 
-  get 'clients/new'
-
-  get 'clients/edit'
-
-  get 'clients/create'
-
-  get 'clients/update'
-
-  get 'clients/show'
-
-  get 'clients/destroy'
-
+  resources :sessions
   resources :companies
+  resources :clients
 
   get '/elements' => 'welcome#elements'
 
