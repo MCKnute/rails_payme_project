@@ -15,7 +15,7 @@ class CompaniesController < ApplicationController
       redirect_to "/register"
     else
       flash[:errors] = @company.errors.full_messages
-      redirect_to :back
+      render :back
     end
   end
 

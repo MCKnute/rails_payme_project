@@ -2,8 +2,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
   get '/register' => 'companies#new', as: :this_new_company
-  
-  post '/sessions' => 'sessions#create'
+
   delete '/sessions' => 'sessions#destroy'
   
   resources :sessions

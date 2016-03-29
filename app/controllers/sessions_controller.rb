@@ -21,7 +21,7 @@ class SessionsController < ApplicationController
         redirect_to "/clients"
       else
         flash[:errors] = ["Invalid combination"]
-        redirect_to "/"
+        redirect_to :back
       end
   end
 
@@ -29,11 +29,11 @@ class SessionsController < ApplicationController
   	if session[:company_id]
       session[:company_id] = nil
       flash[:success] = "You have successfully logged out"
-      redirect_to "/"
+      redirect_to "/register"
     else
       session[:client_id] = nil
       flash[:success] = "You have successfully logged out"
-      redirect_to "/"
+      redirect_to "/register"
     end
   end
 end
