@@ -1,4 +1,16 @@
 Rails.application.routes.draw do
+  get 'clients/index'
+
+  get 'clients/create'
+
+  get 'clients/new' => 'clients#new'
+  
+  get 'clients/:id' => 'clients#show'
+
+  post 'clients' => 'clients#create'
+
+  get 'clients/update'
+
   root 'welcome#index'
 
   get '/elements' => 'welcome#elements'
