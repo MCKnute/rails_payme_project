@@ -14,29 +14,15 @@ class SessionsController < ApplicationController
       if company && company.authenticate(params[:password])
         flash[:success] = "You are logged in as a company"
         session[:company_id] = company.id
-        redirect_to "/"
+        redirect_to "/companies"
       elsif client && client.authenticate(params[:password])
         flash[:success] = "You are logged in as a client"
         session[:client_id] = client.id
-        redirect_to "/"
+        redirect_to "/clients"
       else
         flash[:errors] = ["Invalid combination"]
         redirect_to "/"
       end
-    ##elsif client
-    ## client.inspect
-    ##  if client && client.authenticate(params[:password])
-    ##    flash[:success] = "You are logged in as a client"
-    ##    session[:client_id] = client.id
-    ##    redirect_to "/clients/#{client.id}"
-    ##  else
-    ##    flash[:errors] = ["Invalid combination"]
-    ##    redirect_to "/"
-    ##  end
-    ##else
-    ##  flash[:errors] = ["You are not a registered member. Please register to gain access to the site"]
-    ##  redirect_to "/sessions"
-    ##end
   end
 
   def destroy
