@@ -1,0 +1,31 @@
+<h1>Listing of all clients</h1>
+<table class="table">
+	<thead>
+		<tr>
+			<td>Name</td>
+			<td>Address</td>
+			<td>APT/STE</td>
+			<td>City</td>
+			<td>State</td>
+			<td>Zip Code</td>
+			<td>Phone Number</td>
+			<td>Email</td>
+		</tr>
+	</thead>
+	<tbody>
+		<% if @clients %>
+			<% @clients.each do |client| %></td>
+		<tr>
+			<td><%= client.name %></td>
+			<td><%= client.address_line1 %></td>
+			<td><%= client.address_line2 %></td>
+			<td><%= client.city %></td>
+			<td><%= client.state %></td>
+			<td><%= client.zip %></td>
+			<td><%= client.phone %></td>
+			<td><%= client.email %></td>
+		</tr>
+	</tbody>
+	<% end %>
+<% end %>
+</table>

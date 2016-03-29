@@ -2,6 +2,7 @@
 
 <form action="/clients" method="post">
 	<%=token_tag nil %>
+	<input type="hidden" name="client[company_id]" value="<%= session[:company_id] %>">
     <p>
       <label>Name:</label>
       <input type="text" name="client[name]">
@@ -94,3 +95,4 @@
     </p>
     <button type="submit" value="Add">Add</button>
  </form>
+

@@ -1,19 +1,33 @@
 Rails.application.routes.draw do
-  get 'clients/index'
+  # get 'clients' => 'clients#show'
 
-  get 'clients/create'
+  get "clients/:id" => "clients#show"
 
-  get 'clients/new' => 'clients#new'
+  post 'clients/create' => 'clients#create'
+
+  get 'companies/clients/new' => 'clients#new'
+  
+  post 'clients' => 'clients#create'
   
   get 'clients/:id' => 'clients#show'
-
-  post 'clients' => 'clients#create'
 
   get 'clients/update'
 
   root 'welcome#index'
 
-  get '/elements' => 'welcome#elements'
+  get '/register' => 'companies#new', as: :this_new_company
+
+  delete '/sessions' => 'sessions#destroy'
+  
+  resources :sessions
+
+  get '/companies' => 'dashboards#index'
+
+  resources :companies
+
+  # resources :clients
+
+  resources :dashboards
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

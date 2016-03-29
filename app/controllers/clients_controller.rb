@@ -2,33 +2,45 @@ class ClientsController < ApplicationController
   def index
   end
 
-  def create
-    company = session[:user_id]
-    client = Client.new(name: client_params[:name], address_line1: client_params[:address_line1], address_line2: client_params[:address_line2], city: client_params[:city],
-    		 state: client_params[:state], zip: client_params[:zip], phone: client_params[:phone], email: client_params[:email], password: client_params[:password], 
-    		 company_id: 1)
-    if client.save 
-        redirect_to '/clients/new'
-    else 
-    	flash[:errors] = client.errors.full_messages
-        redirect_to '/clients/new'
-    end	
+  def new
   end
 
   def show
-  	@client = Client.find(2)
-  	@out = Invoice.where(client_id: 2, paid_date: nil)
-  	@paid = Invoice.where(client_id: 2) .where.not(paid_date: nil)
+    if session[:client_id]
+      @client = Client.find(session[:client_id])
+    else 
+      @client = Client.find(params[:id])
+    end
+    @out = Invoice.where(client_id: @client.id, paid_date: nil)
+    @paid = Invoice.where(client_id: @client.id).where.not(paid_date: nil)
+  end
+
+  def create
+    @client = Client.new(client_params)
+    if @client.save
+      flash[:success] = "You have successfully registered as a client"
+      redirect_to "/companies"
+    else
+      flash[:errors] = @client.errors.full_messages
+      redirect_to :back
+    end
   end
 
   def edit
   end
-
+  
   def update
   end
 
-private
+  def destroy
+    session[:client_id]
+    session[:client_id] = nil
+    session.clear
+    redirect_to "/sessions"
+  end
+
+  private
     def client_params
-      params.require(:client).permit(:name, :address_line1, :address_line2, :city, :state, :zip, :phone, :email, :password, :password_confirmation)
-    end 
+      params.require(:client).permit(:name, :address_line1, :address_line2, :city, :state, :zip, :phone, :email, :password, :company_id)
+    end
 end

@@ -1,0 +1,58 @@
+
+        <h1 class="text-center">Register for PayME!</h1>
+        <div class="row">
+          <div class="col-md-6 col-md-offset-3 text-center">
+            
+
+        	<form action="/companies" method="post">
+    		<%= token_tag nil %>
+    		<div class="form-group form-group-lg">
+	    		<label for="company[name]" class="control-label"><h3>Company Name</h3></label>
+	    		<input type="text" name="company[name]" class="form-control" placeholder="Company Name" />
+	    	</div>
+
+
+          </div>
+    	</div>
+    	<div class="row">
+          <div class="col-md-6">
+            
+            <h3>Company Information</h3>
+
+            <div class="form-group">
+              <label for="company[email]">Email address:</label>
+              <input type="email" name="company[email]"  class="form-control"placeholder="Email (Required)" required />
+            </div>
+            <div class="form-group">
+              <label for="company[phone]">Phone:</label>
+              <input type="string" name="company[phone]" class="form-control" placeholder="Phone" required />
+            </div>
+            <div class="form-group">
+               <label for="company[address_line1]">Address:</label>
+              <input type="text" name="company[address_line1]" class="form-control" placeholder="Address Line 1" required /> <br />
+              <input type="text" name="company[address_line2]" class="form-control" placeholder="Suite, Unit, #, etc. (OPTIONAL)" /> <br />
+              <input type="text" name="company[city]" placeholder="City" class="form-control" style="width: 28em; display: inline-block" required /> 
+              <input type="text" name="company[state]" placeholder="State" class="form-control" max-length="2" style="width: 4em; display: inline-block" required /> 
+              <input type="number" name="company[zip]" placeholder="Zipcode" class="form-control" min-length="5" style="width: 7em; display: inline-block" required />
+             </div>
+          </div>
+          <div class="col-md-6">
+
+	          <h3>Password</h3>
+
+	          <label for="company[password]">Password:</label>
+              <input type="password" name="company[password]" class="form-control" placeholder="Password" required />
+              <br />
+              <label for="company[password_confirmation]">Password Confirmation:</label>
+              <input type="password" name="company[password_confirmation]" class="form-control" placeholder="Password Confirmation" required />
+
+           </div>
+        </div>
+        <div class="row text-center">
+              <button type="submit" class="btn btn-primary btn-lg"> Sign Me Up!</button>
+            </form>
+        </div>
+          </div>
+        </div>
+      </div>
+    </div>
