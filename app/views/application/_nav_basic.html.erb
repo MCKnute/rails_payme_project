@@ -29,6 +29,19 @@
              </div>
            </form> 
 
+           <% elsif session[:client_id] %>
+
+            <form action='/sessions' method='post' class="navbar-form navbar-right">
+            
+             <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+             <input type="hidden" name="_method" value="delete">
+             <div class="form-group">
+               <strong class="text-muted">Logged in as a Client </strong>
+               <button type='submit' value='Log Out' class="btn btn-sm btn-default">Sign Out</button>
+             </div>
+           </form> 
+
+
            <% else %>
   
            <form class="navbar-form navbar-right" action="/sessions" method="post">
