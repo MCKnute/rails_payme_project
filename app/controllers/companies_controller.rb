@@ -7,6 +7,7 @@ class CompaniesController < ApplicationController
   end
 
   def edit
+    @company = Company.find(session[:company_id])
   end
 
   def create
@@ -21,6 +22,19 @@ class CompaniesController < ApplicationController
   end
 
   def update
+    company = Company.find(session[:company_id])
+    if company.update(name: params[:name],
+                      address_line1: params[:address_line1],
+                      address_line2: params[:address_line2],
+                      city: params[:city], 
+                      state: params[:state],
+                      zip: params[:zip], 
+                      phone: params[:phone])
+    redirect_to '/companies'
+    else
+      flash[:errors] = company.errors.full_messages
+      redirect_to :back
+    end
   end
 
   def show

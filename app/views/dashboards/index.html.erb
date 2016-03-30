@@ -1,6 +1,7 @@
 <div class="text-center">
-	<h1>Welcome Company!</h1>
-	<a href="/companies/clients/new" class="btn btn-lg btn-warning">+ New Client</a> 
+	<h1>Welcome <%= @company.name %>!</h1>
+	<a href="/companies/clients/new" class="btn btn-lg btn-warning">+ New Client</a> 	
+	<a href="/companies/edit" class="btn btn-lg btn-primary">Update Info</a> 
 	
 </div>
 <%= render "dashboard_listing" %>

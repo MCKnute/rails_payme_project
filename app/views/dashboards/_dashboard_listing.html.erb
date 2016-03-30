@@ -10,7 +10,7 @@
 			<td>Address</td>
 			<td>APT/Suite</td>
 			<td>City</td>
-			<td>State</td>
+			<td>State</td> 
 			<td>Zip Code</td>
 			<td>Phone Number</td>
 			<td>Email</td>
@@ -33,7 +33,8 @@
 			<td><button class="addNewinvoice btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#addModal" type="button">+ New Invoice
 				</button>
 				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
-			</td>
+			</td>			
+			<td><a href="/companies/clients/<%= client.id %>/edit" class="btn btn-lg btn-primary">Update Info</a></td>
 		</tr>
 	<% end %>
 	</tbody>
