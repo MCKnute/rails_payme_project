@@ -1,3 +1,11 @@
+<% if session[:company_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/companies">Company Dashboard</a></li>
+		<li class="active">Client Info</li>
+	</ol>
+<% end %>
+
+
 <h1>
 	<% if session[:company_id] %>
 		Client Info: 
@@ -21,7 +29,7 @@
 	<% if @out == [] %>
 		<h4>You currently have no outstanding invoices</h4>
 	<% else %>
-	<table class="table table-bordered">
+	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>Company Name</th>
@@ -41,8 +49,8 @@
 					<td><%= out.sendDate%></td>
 					<td><%= out.due_by%></td>
 					<td>
-						<button class="btn btn-info">By Stripe</button>
-						<button class="btn btn-info">By Check</button>
+						<button class="btn btn-info"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> By Stripe</button>
+						<button class="btn btn-info"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> By Check</button>
 					</td>
 				</tr>
 			<% end %>
