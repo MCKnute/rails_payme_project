@@ -20,11 +20,12 @@
 			<td><%= render 'modal', :client => client %></td>
 			<td><%= client.phone %></td>
 			<td><%= client.email %></td>
-			<td><button class="addNewinvoice btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#addModal" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-file" aria-hidden="true"></span> New Invoice
+			<td class="text-right">
+				<button class="addNewinvoice btn btn-success btn-sm" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-file" aria-hidden="true"></span> New Invoice
 				</button>
 				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
-			</td>			
-			<td><a href="/companies/clients/<%= client.id %>/edit" class="btn btn-lg btn-primary">Update Info</a></td>
+				<a href="/companies/clients/<%= client.id %>/edit" class="btn btn-sm btn-primary" type="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Client</a>
+			</td>
 		</tr>
 	<% end %>
 	</tbody>

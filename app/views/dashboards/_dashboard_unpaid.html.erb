@@ -24,9 +24,9 @@
 			<td>$<%= unpaid.amount %></td>
 			<td><%= unpaid.description %></td>
 			<td class="text-right">
-				<button class="btn btn-default btn-sm" data-toggle="check_modal<%= unpaid.id %>" data-target="#addCheck<%= unpaid.id %>">Check Payment
+				<button class="btn btn-success btn-sm" data-toggle="check_modal<%= unpaid.id %>" data-target="#addCheck<%= unpaid.id %>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong>$</strong> Record Check
 				</button>
-				<button class="btn btn-default btn-sm" data-toggle="edit_modal<%= unpaid.id %>" data-target="#Invoice<%= unpaid.id %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Invoice
+				<button class="btn btn-primary btn-sm" data-toggle="edit_modal<%= unpaid.id %>" data-target="#Invoice<%= unpaid.id %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Invoice
 				</button>
 				<button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Invoice
 				</button>

@@ -3,6 +3,10 @@
 		<li><a href="/companies">Company Dashboard</a></li>
 		<li class="active">Client Info</li>
 	</ol>
+<% elsif session[:client_id] %>
+		<ol class="breadcrumb">
+		<li class="active">Client Dashboard</li>
+	</ol>
 <% end %>
 
 
