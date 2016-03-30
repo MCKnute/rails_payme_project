@@ -1,4 +1,11 @@
-<h1>Client Info: <%= @client.name %></h1>
+<h1>
+	<% if session[:company_id] %>
+		Client Info: 
+	<% elsif session[:client_id] %>
+		Welcome 
+	<% end %>
+
+	<%= @client.name %></h1>
 
 	<h4>Mailing Address:</h4>
 	<address>
@@ -34,8 +41,8 @@
 					<td><%= out.sendDate%></td>
 					<td><%= out.due_by%></td>
 					<td>
-						<button>By Stripe</button>
-						<button>By Check</button>
+						<button class="btn btn-info">By Stripe</button>
+						<button class="btn btn-info">By Check</button>
 					</td>
 				</tr>
 			<% end %>
@@ -45,7 +52,7 @@
 
 	<h3>Paid Invoices</h3>
 	<% if @paid == [] %>
-		<h3>You currently have no paid invoices</h3>
+		<h4>You currently have no paid invoices</h3>
 	<% else %>
 	<table class="table table-bordered">
 		<thead>
