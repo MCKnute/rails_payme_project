@@ -10,11 +10,12 @@
 			<td>Zip Code</td>
 			<td>Phone Number</td>
 			<td>Email</td>
+			<td>Action</td>
 		</tr>
 	</thead>
 	<tbody>
-		<% if @clients %>
-			<% @clients.each do |client| %></td>
+
+			<% @clients.each do |client| %>
 		<tr>
 			<td><%= client.name %></td>
 			<td><%= client.address_line1 %></td>
@@ -24,8 +25,12 @@
 			<td><%= client.zip %></td>
 			<td><%= client.phone %></td>
 			<td><%= client.email %></td>
+			<td><button class="addNewinvoice btn btn-primary pull-right" data-toggle="modal" data-target="#addModal" type="button">Send New Invoice
+				</button>
+				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
+			</td>
 		</tr>
+			<% end %>
 	</tbody>
-	<% end %>
-<% end %>
 </table>
+
