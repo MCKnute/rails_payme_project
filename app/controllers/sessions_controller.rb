@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       elsif client && client.authenticate(params[:password])
         flash[:success] = "You are logged in as a client"
         session[:client_id] = client.id
-        redirect_to "/clients"
+        redirect_to "/clients/#{client.id}"
       else
         flash[:errors] = ["Invalid combination"]
         redirect_to :back
