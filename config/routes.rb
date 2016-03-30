@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-  
-  get '/companies/reports' => 'reports#index'
 
   # get 'clients' => 'clients#show'
 
   get "clients/:id" => "clients#show"
 
   post 'clients/create' => 'clients#create'
-
   
   get 'clients' => 'clients#show'
 
@@ -15,19 +12,28 @@ Rails.application.routes.draw do
 
   post 'clients' => 'clients#create'
 
+  get 'companies/clients/:id/edit' => 'clients#edit'
+
+  post 'clients/update' => 'clients#update'
+
   get 'companies/clients/:id' => 'clients#show'
   
   get 'companies/clients/new' => 'clients#new'
   
   post 'companies' => 'companies#create'
 
-  post 'clients/update' => 'clients#update'
-
-  get 'companies/clients/:id/edit' => 'clients#edit'
-
   get 'companies/edit' => 'companies#edit'
 
   post 'companies/update' => 'companies#update'
+
+  get '/companies/reports' => 'reports#index'
+
+  get '/companies/reports/1st' => 'reports#oneq'
+
+  get '/companies/reports/2nd' => 'reports#twoq'
+  get '/companies/reports/3rd' => 'reports#threeq'
+  get '/companies/reports/4th' => 'reports#fourq'
+
 
   root 'welcome#index'
 

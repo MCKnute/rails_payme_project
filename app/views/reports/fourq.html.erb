@@ -4,20 +4,17 @@
 
 <div class="text-center">
 	<h3>Total Paid Invoice for 2016: <span style="color:#1AC262"><%= @total %></span></h3>
+	<h3>4th Quarter for 2016: <span style="color:#D5D412"><%= @total4 %></span></h3>
 </div>
 <div class="text-center">
 	<h4>Quaterly: 
+	<a href="/companies/reports" class="btn btn-sm btn-danger">Yearly</a> 
 	<a href="/companies/reports/1st" class="btn btn-sm btn-warning">1st</a> 
 	<a href="/companies/reports/2nd" class="btn btn-sm btn-warning">2nd</a> 
 	<a href="/companies/reports/3rd" class="btn btn-sm btn-warning">3rd</a> 
-	<a href="/companies/reports/4th" class="btn btn-sm btn-warning">4th</a> 
 	</h4>
 </div>
 
-<div class="text-center">
-	<a href="/companies" class="btn btn-sm btn-warning">Home</a> 
-</div>
-<p></p>
 <% if @invoices == [] %>
 	<h3>You currently have no paid Invoices.</h3>
 <% else %>
@@ -45,4 +42,3 @@
 	</tbody>
 <% end %>
 </table>
-
