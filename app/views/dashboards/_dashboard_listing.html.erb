@@ -1,8 +1,12 @@
 <h1>Listing of all clients</h1>
+<% if @clients == [] %>
+	<h3>You currently have no clients.</h3>
+<% else %>
 <table class="table">
 	<thead>
 		<tr>
 			<td>Name</td>
+			<td>Email</td>
 			<td>Address</td>
 			<td>APT/STE</td>
 			<td>City</td>
@@ -13,24 +17,25 @@
 			<td>Action</td>
 		</tr>
 	</thead>
-	<tbody>
 
-			<% @clients.each do |client| %>
+	<tbody>
 		<tr>
+	<% @clients.each do |client| %>
 			<td><%= client.name %></td>
-			<td><%= client.address_line1 %></td>
+			<td><%= client.email %></td>
+			<td><%= render 'modal', :client => client %></td>
 			<td><%= client.address_line2 %></td>
 			<td><%= client.city %></td>
 			<td><%= client.state %></td>
 			<td><%= client.zip %></td>
 			<td><%= client.phone %></td>
 			<td><%= client.email %></td>
-			<td><button class="addNewinvoice btn btn-primary pull-right" data-toggle="modal" data-target="#addModal" type="button">Send New Invoice
+			<td><button class="addNewinvoice btn btn-sm-default pull-right" data-toggle="modal" data-target="#addModal" type="button">Send New Invoice
 				</button>
 				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
 			</td>
 		</tr>
-			<% end %>
+	<% end %>
 	</tbody>
 </table>
-
+<% end %>
