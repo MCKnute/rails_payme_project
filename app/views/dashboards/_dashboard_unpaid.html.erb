@@ -1,4 +1,7 @@
 <h1>Listing of all Outstanding Invoices</h1>
+<% if @unpaidvoices == [] %>
+	<h3>You currently have no outstanding invoices.</h3>
+<% else %>
 <table class="table">
 	<thead>
 		<tr>
@@ -7,9 +10,8 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% if @unpaidvoices %>
-			<% @unpaidvoices.each do |unpaid| %></td>
 		<tr>
+		<% @unpaidvoices.each do |unpaid| %></td>
 			<td><%= unpaid.client.name %></td>
 			<td><%= unpaid.amount %></td>
 		</tr>
