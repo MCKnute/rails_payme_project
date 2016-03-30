@@ -41,6 +41,7 @@
 			</tr>
 		</thead>
 		<tbody>
+		<% if  %>
 			<% @out.each do |out| %>
 				<tr>
 					<td><%= out.company.name %></td>
@@ -54,6 +55,7 @@
 					</td>
 				</tr>
 			<% end %>
+		<% %>
 		</tbody>
 	</table>
 	<% end %>

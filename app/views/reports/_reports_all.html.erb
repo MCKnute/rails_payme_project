@@ -1,0 +1,34 @@
+<div class="text-center">
+	<h3>Total Paid Invoice for 2016: <span style="color:#1AC262"><%= @total %></span></h3>
+</div>
+<a href="/companies/reports" class="btn btn-lg btn-success">Reports</a> 
+<a href="/companies/reports" class="btn btn-lg btn-success">Reports</a> 
+<a href="/companies/reports" class="btn btn-lg btn-success">Reports</a> 
+<a href="/companies/reports" class="btn btn-lg btn-success">Reports</a> 
+<% if @invoices == [] %>
+	<h3>You currently have no paid Invoices.</h3>
+<% else %>
+<table class="table table-striped">
+
+	<thead>
+		<tr>
+			<td>Client Name</td>
+			<td>Amount Paid</td>
+			<td>Stripe Payment ID</td>
+			<td>Check #</td>
+			<td>Date Paid</td>
+		</tr>
+	</thead>
+	<tbody>
+		<% @invoices.each do |paid| %>
+		<tr>
+			<td><%= paid.client.name %></td>
+			<td>$<%= paid.amount %></td>
+			<td><%= paid.stripe_payment %></td>
+			<td><%= paid.check_payment %></td>
+			<td><%= paid.paid_date %></td>
+		</tr>
+		<% end %>
+	</tbody>
+<% end %>
+</table>
