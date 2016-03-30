@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get '/companies/reports' => 'reports#index'
+
   # get 'clients' => 'clients#show'
 
   get "clients/:id" => "clients#show"
