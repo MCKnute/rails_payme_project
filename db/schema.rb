@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20160329211529) do
   create_table "invoices", force: :cascade do |t|
     t.integer  "client_id"
     t.integer  "company_id"
-    t.date     "sendDate"
+    t.date     "send"
     t.date     "due_by"
     t.text     "description"
     t.float    "amount"
