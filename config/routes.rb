@@ -16,7 +16,13 @@ Rails.application.routes.draw do
   
   get 'clients/:id' => 'clients#show'
 
-  get 'clients/update'
+  post 'clients/update' => 'clients#update'
+
+  get 'companies/clients/:id/edit' => 'clients#edit'
+
+  get 'companies/edit' => 'companies#edit'
+
+  post 'companies/update' => 'companies#update'
 
   root 'welcome#index'
 
