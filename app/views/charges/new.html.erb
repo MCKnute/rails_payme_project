@@ -1,0 +1,71 @@
+<%= form_tag charges_path do %>
+  <article>
+    <% if flash[:error].present? %>
+      <div id="error_explanation">
+        <p><%= flash[:error] %></p>
+      </div>
+    <% end %>
+    <label class="amount">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Invoice Number</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Description</th>
+            <th>Send Date</th>
+            <th>Due Date</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><%= @invoice.id %></td>
+            <td>
+              <p><%= @invoice.client.name %></p>
+              <p><%= @invoice.client.address_line1 %></p>
+                <% if @invoice.client.address_line2 %>
+                    <p><%= @invoice.client.address_line2 %></h4>
+                <% end %>
+              <p>
+                <%= @invoice.client.city %>,
+                <%= @invoice.client.state %> 
+                <%= @invoice.client.zip %>
+              </p>
+            </td>
+            <td>
+              <p><%= @invoice.company.name %></p>
+              <p><%= @invoice.company.address_line1 %></p>
+                <% if @invoice.company.address_line2 %>
+                    <p><%= @invoice.company.address_line2 %></h4>
+                <% end %>
+              <p>
+                <%= @invoice.company.city %>,
+                <%= @invoice.company.state %> 
+                <%= @invoice.company.zip %>
+              </p>
+            </td>
+            <td><%= @invoice.description %></td>
+            <td><%= @invoice.sendDate %></td>
+            <td><%= @invoice.due_by %></td>
+            <td>$<%= @invoice.amount %></td>
+          </tr>   
+        </tbody>
+      </table>
+  </article>
+
+
+<form action="/charge" method="POST">
+  <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
+  <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_test_SbFR02JMOJuev24sEKlekx4w"
+    data-image="https://cdn1.iconfinder.com/data/icons/real-estate-set-1/512/19-512.png"
+    data-name="PayME"
+    data-description=""
+    data-amount=""
+    data-locale="auto">
+  </script>
+</form>
+<% end %>

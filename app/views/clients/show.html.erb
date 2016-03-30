@@ -12,25 +12,32 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				<th>Invoice Number</th>
 				<th>Company Name</th>
 				<th>Description</th>
 				<th>Amount</th>
 				<th>Send Date</th>
 				<th>Due By Date</th>
-				<th>Pay</th>
+				<th>Action</th>
 			</tr>
 		</thead>
 		<tbody>
 			<% @out.each do |out| %>
 				<tr>
+					<td><%= out.id %></td>
 					<td><%= out.company.name %></td>
 					<td><%= out.description %></td>
 					<td>$<%= out.amount %></td>
 					<td><%= out.sendDate%></td>
 					<td><%= out.due_by%></td>
 					<td>
-						<button>By Stripe</button>
-						<button>By Check</button>
+						<form action="/charges/new">
+							<input type="hidden" name="invoice_id" value="<%= out.id %>">
+							<input type="hidden" name="invoice_amt" value="<%= out.amount %>">
+							<button type="submit">Pay by Stripe</button>
+						</form>
+						<button>Pay by Check</button>
+						<button>View Invoice</button>
 					</td>
 				</tr>
 			<% end %>
@@ -41,20 +48,26 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
+				<th>Invoice Number</th>
 				<th>Company Name</th>
 				<th>Description</th>
 				<th>Amount</th>
 				<th>Paid Date</th>
+				<th>Action</th>
 
 			</tr>
 		</thead>
 		<tbody>
 			<% @paid.each do |paid| %>
 				<tr>
+					<td><%= out.id %></td>
 					<td><%= paid.company.name %></td>
 					<td><%= paid.description %></td>
 					<td>$<%= paid.amount %></td>
 					<td><%= paid.paid_date %></td>
+					<td>
+						<button><a href="">View Invoice</a></button>
+					</td>
 				</tr>
 			<% end %>
 		</tbody>
