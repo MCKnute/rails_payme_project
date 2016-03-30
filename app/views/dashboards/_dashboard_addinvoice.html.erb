@@ -1,0 +1,56 @@
+<!-- Modal for "Add New Product" -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Add New Invoice for <%= client.name %></h4>
+		    </div>
+		    <!-- Error check -->
+		    <div class="has-error">
+			<% if flash[:errors] %>
+				<p class="bg-danger text-center" style="padding:1em; margin-bottom: 0; font-weight: bold">
+			        <% flash[:errors].each do |e| %>
+			          <%= e %> <br />
+			        <% end %>
+			    </p>
+		    <% end %>
+		    </div>
+		    <!-- Add Product Form -->
+	    	<form action="/invoices" method="post">
+	    		<%= token_tag nil %>
+	    		<input type="hidden" name="invoice[client_id]" value="<%=client.id %>">
+	    		<input type="hidden" name="invoice[company_id]" value="<%=session[:company_id] %>">
+	    		
+	    		<div class="form-group">
+	    			<label class="col-sm-3 control-label">Send Date</label>
+		    		<div class="col-sm-8">
+                        <input type="date" class="form-control" name="invoice[sendDate]"/>
+                    </div>
+	    		</div>
+	    		<div class="form-group">
+	    			<label class="col-sm-3 control-label">Due By</label>
+		    		<div class="col-sm-8">
+                        <input type="date" class="form-control" name="invoice[due_by]"/>
+                    </div>
+	    		</div>
+	    		<div class="form-group">
+	    			<label class="col-sm-3 control-label">Description</label>
+		    		<div class="col-sm-8">
+                        <textarea type="text" class="form-control" name="invoice[description]"></textarea>
+                    </div>
+	    		</div>
+	    		<div class="form-group">
+	    			<label class="col-sm-3 control-label">Amount</label>
+		    		<div class="col-sm-8">
+                        <input type="number" class="form-control" name="invoice[amount]"/>
+                    </div>
+	    		</div>
+
+				<div class="modal-footer">
+			    	<button type="submit" class="btn btn-success center-block">Send Invoice to <%= client.name %></button>
+			    </div>
+		    </form>
+		</div>
+    </div>
+</div><!-- Modal End -->

@@ -1,5 +1,9 @@
 <h2>Paid Invoices</h2>
+<% if @paidvoices == [] %>
+	<h3>You currently have no paid Invoices.</h3>
+<% else %>
 <table class="table table-striped">
+
 	<thead>
 		<tr>
 			<td>Client Name</td>
@@ -8,9 +12,8 @@
 		</tr>
 	</thead>
 	<tbody>
-		<% if @paidvoices %>
-			<% @paidvoices.each do |paid| %></td>
 		<tr>
+		<% @paidvoices.each do |paid| %></td>
 			<td><%= paid.client.name %></td>
 			<td><%= paid.amount %></td>
 			<td><%= paid.paid_date %></td>
