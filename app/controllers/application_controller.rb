@@ -3,9 +3,14 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  before_action :current_user
+
   def current_user
-  	Company.find(session[:company_id]) if session[:company_id]
-  	Client.find(session[:client_id]) if session[:client_id]
+    if session[:company_id]
+    	@current_user = Company.find(session[:company_id])
+    elsif session[:client_id]
+    	@current_user = Client.find(session[:client_id])
+    end
   end
 
   helper_method :current_user
@@ -14,7 +19,7 @@ class ApplicationController < ActionController::Base
   	redirect_to "/sessions" if session[:company_id] || session[:client_id]
   end
 
-  def require_corrent_user
+  def require_current_user
   	if session[:company_id]
   		company = Company.find(session[:company_id])
   		redirect_to "/sessions" if current_user != company
