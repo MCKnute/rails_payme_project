@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   get 'companies/clients/new' => 'clients#new'
   
-  get 'clients' => 'dashboards#index'
+  get 'clients' => 'clients#show'
 
   post 'clients' => 'clients#create'
   
