@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   post '/companies' => 'companies#create'
   
+  get 'clients' => 'clients#show'
+
   post 'clients' => 'clients#create'
   
   get 'clients/:id' => 'clients#show'

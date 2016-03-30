@@ -1,14 +1,14 @@
-<h1>Listing of all clients</h1>
+<h2>Client List</h2>
 <% if @clients == [] %>
 	<h3>You currently have no clients.</h3>
 <% else %>
-<table class="table">
+<table class="table table-striped">
 	<thead>
 		<tr>
 			<td>Name</td>
 			<td>Email</td>
 			<td>Address</td>
-			<td>APT/STE</td>
+			<td>APT/Suite</td>
 			<td>City</td>
 			<td>State</td>
 			<td>Zip Code</td>
@@ -30,7 +30,7 @@
 			<td><%= client.zip %></td>
 			<td><%= client.phone %></td>
 			<td><%= client.email %></td>
-			<td><button class="addNewinvoice btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#addModal" type="button">Send New Invoice
+			<td><button class="addNewinvoice btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#addModal" type="button">+ New Invoice
 				</button>
 				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
 			</td>

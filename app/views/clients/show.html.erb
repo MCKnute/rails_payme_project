@@ -1,15 +1,26 @@
-<div id="container">
-	<h3>Client Info:</h3>
-	<fieldset>
-	<h4><%= @client.name %></h4>
-	<h4><%= @client.address_line1 %></h4>	
-	<% if @client.address_line2 %>
-		<h4><%= @client.address_line2 %></h4>
+<h1>
+	<% if session[:company_id] %>
+		Client Info: 
+	<% elsif session[:client_id] %>
+		Welcome 
 	<% end %>
-	<h4><%= @client.city %>, <%= @client.state %> <%= @client.zip %></h4>
-	</fieldset>
 
-	<h4>Outstanding Invoices</h4>
+	<%= @client.name %></h1>
+
+	<h4>Mailing Address:</h4>
+	<address>
+		<%= @client.name %><br />
+		<%= @client.address_line1 %><br />	
+		<% if @client.address_line2 %>
+			<%= @client.address_line2 %><br />
+		<% end %>
+		<%= @client.city %>, <%= @client.state %> <%= @client.zip %>
+	</address>
+
+	<h3>Outstanding Invoices</h3>
+	<% if @out == [] %>
+		<h4>You currently have no outstanding invoices</h4>
+	<% else %>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -30,15 +41,19 @@
 					<td><%= out.sendDate%></td>
 					<td><%= out.due_by%></td>
 					<td>
-						<button>By Stripe</button>
-						<button>By Check</button>
+						<button class="btn btn-info">By Stripe</button>
+						<button class="btn btn-info">By Check</button>
 					</td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
+	<% end %>
 
-	<h4>Paid Invoices</h4>
+	<h3>Paid Invoices</h3>
+	<% if @paid == [] %>
+		<h4>You currently have no paid invoices</h3>
+	<% else %>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -60,4 +75,4 @@
 			<% end %>
 		</tbody>
 	</table>
-</div>
+	<% end %>

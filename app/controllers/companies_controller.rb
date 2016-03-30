@@ -1,4 +1,5 @@
 class CompaniesController < ApplicationController
+  
   def index
   end
 
@@ -11,7 +12,7 @@ class CompaniesController < ApplicationController
   def create
     @company = Company.new(company_params)
     if @company.save
-      flash[:success] = "You have successfully registered as a Company"
+      flash[:success] = "You have successfully registered as a new Company"
       redirect_to "/register"
     else
       flash[:errors] = @company.errors.full_messages
@@ -35,4 +36,5 @@ class CompaniesController < ApplicationController
     def company_params
       params.require(:company).permit(:name, :address_line1, :address_line2, :city, :state, :zip, :phone, :email, :password, :password_confirmation)
     end
+
 end
