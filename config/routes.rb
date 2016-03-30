@@ -7,6 +7,8 @@ Rails.application.routes.draw do
   post 'clients/create' => 'clients#create'
 
   get 'companies/clients/new' => 'clients#new'
+
+  post '/companies' => 'companies#create'
   
   post 'clients' => 'clients#create'
   

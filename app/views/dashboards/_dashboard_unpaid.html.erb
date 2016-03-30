@@ -7,6 +7,8 @@
 		<tr>
 			<td>Client Name</td>
 			<td>Amount Due</td>
+			<td>Sent Date</td>
+			<td>Due Date</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -14,6 +16,8 @@
 		<% @unpaidvoices.each do |unpaid| %></td>
 			<td><%= unpaid.client.name %></td>
 			<td><%= unpaid.amount %></td>
+			<td><%= unpaid.sendDate %></td>
+			<td><%= unpaid.due_by %></td>
 		</tr>
 	</tbody>
 	<% end %>
