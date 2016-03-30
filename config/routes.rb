@@ -6,17 +6,26 @@ Rails.application.routes.draw do
 
   post 'clients/create' => 'clients#create'
 
-  get 'companies/clients/new' => 'clients#new'
-
-  get 'companies/clients/:id' => 'clients#show'
   
   get 'clients' => 'clients#show'
 
-  post 'clients' => 'clients#create'
-  
   get 'clients/:id' => 'clients#show'
 
-  get 'clients/update'
+  post 'clients' => 'clients#create'
+
+  get 'companies/clients/:id' => 'clients#show'
+  
+  get 'companies/clients/new' => 'clients#new'
+  
+  post 'companies' => 'companies#create'
+
+  post 'clients/update' => 'clients#update'
+
+  get 'companies/clients/:id/edit' => 'clients#edit'
+
+  get 'companies/edit' => 'companies#edit'
+
+  post 'companies/update' => 'companies#update'
 
   root 'welcome#index'
 
