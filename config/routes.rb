@@ -22,7 +22,7 @@ Rails.application.routes.draw do
 
   post 'clients/update' => 'clients#update'
 
-  get 'companies/clients/:id' => 'clients#show'  
+  get 'companies/clients/:id' => 'clients#show' 
   
   get 'companies/clients/:id/edit' => 'clients#edit'
   
@@ -60,6 +60,10 @@ Rails.application.routes.draw do
   resources :dashboards
 
   resources :charges
+
+  get 'companies/invoices/:id' => 'invoices#show' 
+
+  get 'clients/invoices/:id' => 'invoices#show'  
 
   resources :invoices
 

@@ -1,4 +1,10 @@
 class InvoicesController < ApplicationController
+
+  def show
+    @invoice = Invoice.find(params[:id])
+  end
+
+
   def create
     @invoice = Invoice.new(invoice_params)
     if @invoice.save
