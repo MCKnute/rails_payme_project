@@ -11,7 +11,18 @@ class InvoicesController < ApplicationController
   end
 
   def update
+  	# the below updates invoice to be paid via updating stripe_payment(or check_payment) and paid_date
+  	# Invoice.update(4, :stripe_payment=> "222sd2g34234",:paid_date => Time.now.to_s(:db))
+  	@invoice = Invoice.find(params[:id])
 
+  	if @invoice.update(invoice_params)
+  		flash[:success] = "Your invoice has been updated"
+  		# change the redirect_to to be after clients
+  		redirect_to "/clients"
+  	else
+  		flash[:errors] = @invoice.errors.full_messages
+  		redirect_to :back
+  	end
   end		
 
   def destroy
