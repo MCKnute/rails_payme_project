@@ -77,7 +77,7 @@ class ReportsController < ApplicationController
       @enddate = params[:id]+"-03-31"
       params[:id2] = "1"
     end
-    @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date) 
+    @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date).order(:paid_date) 
     @total = @invoices.sum(:amount)
   end
 

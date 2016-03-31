@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *
  */
 
 @import "bootstrap-sprockets";
@@ -56,13 +57,31 @@ footer {
 	letter-spacing: 1px;
 }
 
-#invoice_wrapper {
+
+
+.btn-print {
+	background-color: #AAA;
+	color: #FFF;
+}
+
+#print_wrapper {
 	border: 1px solid #CCC;
 	padding: 4em;
 	margin-top: 2em;
 }
 
-.btn-print {
-	background-color: #AAA;
-	color: #FFF;
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print_wrapper, #print_wrapper * {
+    visibility: visible;
+  }
+  #print_wrapper {
+  	position: absolute;
+    left: 0;
+    top: 0;
+    border: 0;
+    width: 100%;
+  }
 }

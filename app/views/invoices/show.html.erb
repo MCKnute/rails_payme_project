@@ -27,11 +27,11 @@
     </div>
   </div>
 
-<div id="invoice_wrapper" class="col-md-10 col-md-offset-1">
+<div id="print_wrapper" class="col-md-10 col-md-offset-1">
   <h1 class="text-center">INVOICE</h1>
 
   <div class="row" >
-    <div class="col-md-6">
+    <div class="col-md-6" style="display:inline-block">
       <h5>From:</h5>
       <address>
         <strong><%= @invoice.company.name %></strong><br />
@@ -45,7 +45,7 @@
       </address>
     </div>
 
-    <div class="col-md-3 col-md-offset-3">
+    <div class="col-md-3 col-md-offset-3" style="display:inline-block; float: right">
       <h5 style="font-weight:bold">Invoice # <%= @invoice.id %></h5>
       <strong>Send Date:</strong> <%= @invoice.sendDate %><br />
       <strong>Due Date:</strong> <%= @invoice.due_by %><br />
@@ -53,7 +53,7 @@
   </div>
 
   <div class="row" >
-    <div class="col-md-12">
+    <div class="col-md-6" style="display: inline-block">
       <h5>Bill To:</h5>
       <address>
         <strong><%= @invoice.client.name %></strong><br />
@@ -63,6 +63,12 @@
         <% end %>
         <%= @invoice.client.city %>, <%= @invoice.client.state %> <%= @invoice.client.zip %><br />
       </address>
+    </div>
+
+    <div class="col-md-6" style="display:inline-block; float: right">
+      <% if @invoice.paid_date %>
+      <div style="border: 3px solid darkgreen; color: darkgreen; border-radius: 10px; text-align: center; padding: 1em; font-size: xx-large; background-color: lightgreen">PAID on <%= @invoice.paid_date %></div>
+      <% end %>
     </div>
 
 </div>
