@@ -1,6 +1,6 @@
 class Client < ActiveRecord::Base
   belongs_to :company
-  has_many :invoices
+  has_many :invoices, dependent: :destroy
   has_many :company_invoices, through: :invoices, source: :company
   has_secure_password
 
