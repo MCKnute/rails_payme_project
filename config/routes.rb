@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   # get 'clients' => 'clients#show'
 
   get "clients/:id" => "clients#show"
@@ -6,7 +7,11 @@ Rails.application.routes.draw do
   post 'clients/create' => 'clients#create'
 
   get 'companies/clients/new' => 'clients#new'
+
+  get 'companies/clients/:id' => 'clients#show'
   
+  get 'clients' => 'clients#show'
+
   post 'clients' => 'clients#create'
   
   get 'clients/:id' => 'clients#show'
@@ -23,13 +28,14 @@ Rails.application.routes.draw do
 
   get '/companies' => 'dashboards#index'
 
-  resources :companies
-
   # resources :clients
 
   resources :dashboards
 
   resources :charges
+
+  resources :invoices
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

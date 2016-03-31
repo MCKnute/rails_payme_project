@@ -1,0 +1,25 @@
+<!-- add new product button via MODAL.js from bootstrap-->
+<a data-toggle="modal" data-target="#addModal<%= client.id %>"><%= client.address_line1 %> <span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span></a>
+                <!-- Modal for "Add New Product" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+</head>
+<body>
+<div class="modal fade" id="addModal<%= client.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <iframe data-toggle="modal" data-target="#addModal"
+                  width="570"
+                  height="450"
+                  frameborder="1" style="border:1"
+                  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCpLkHgihCHoBs42mmdFokroX_eLW3i49Q
+                &q=<%= client.address_line1.delete(' ') + "," + client.city + "," + client.state %>" allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </div>
+</div>
+</body>

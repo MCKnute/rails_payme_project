@@ -54,8 +54,8 @@
       </table>
   </article>
 
-
 <form action="/charge" method="POST">
+  <%=token_tag nil %>
   <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
   <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
   <script
@@ -63,7 +63,7 @@
     data-key="pk_test_SbFR02JMOJuev24sEKlekx4w"
     data-image="https://cdn1.iconfinder.com/data/icons/real-estate-set-1/512/19-512.png"
     data-name="PayME"
-    data-description=""
+    data-description="Amount: $<%=@invoice.amount%>"
     data-amount=""
     data-locale="auto">
   </script>

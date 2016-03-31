@@ -1,15 +1,35 @@
-<div id="container">
-	<h4>Client Info:</h4>
+<% if session[:company_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/companies">Company Dashboard</a></li>
+		<li class="active">Client Info</li>
+	</ol>
+<% end %>
 
-	<h4><%= @client.name %></h4>
-	<h4><%= @client.address_line1 %></h4>	
-	<% if @client.address_line2 %>
-		<h4><%= @client.address_line2 %></h4>
+
+<h1>
+	<% if session[:company_id] %>
+		Client Info: 
+	<% elsif session[:client_id] %>
+		Welcome 
 	<% end %>
-	<h4><%= @client.city %>, <%= @client.state %> <%= @client.zip %></h4>
 
-	<h4>Outstanding Invoices</h4>
-	<table class="table table-bordered">
+	<%= @client.name %></h1>
+
+	<h4>Mailing Address:</h4>
+	<address>
+		<%= @client.name %><br />
+		<%= @client.address_line1 %><br />	
+		<% if @client.address_line2 %>
+			<%= @client.address_line2 %><br />
+		<% end %>
+		<%= @client.city %>, <%= @client.state %> <%= @client.zip %>
+	</address>
+
+	<h3>Outstanding Invoices</h3>
+	<% if @out == [] %>
+		<h4>You currently have no outstanding invoices</h4>
+	<% else %>
+	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
 				<th>Invoice Number</th>
@@ -34,17 +54,21 @@
 						<form action="/charges/new">
 							<input type="hidden" name="invoice_id" value="<%= out.id %>">
 							<input type="hidden" name="invoice_amt" value="<%= out.amount %>">
-							<button type="submit">Pay by Stripe</button>
+							<button type="submit" class="btn btn-info"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span>Pay by Stripe</button>
 						</form>
-						<button>Pay by Check</button>
-						<button>View Invoice</button>
+						<button class="btn btn-info"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> By Check</button>
+						<button class="btn btn-info"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> View Invoice</button>
 					</td>
 				</tr>
 			<% end %>
 		</tbody>
 	</table>
+	<% end %>
 
-	<h4>Paid Invoices</h4>
+	<h3>Paid Invoices</h3>
+	<% if @paid == [] %>
+		<h4>You currently have no paid invoices</h3>
+	<% else %>
 	<table class="table table-bordered">
 		<thead>
 			<tr>
@@ -60,7 +84,7 @@
 		<tbody>
 			<% @paid.each do |paid| %>
 				<tr>
-					<td><%= out.id %></td>
+					<td><%= paid.id %></td>
 					<td><%= paid.company.name %></td>
 					<td><%= paid.description %></td>
 					<td>$<%= paid.amount %></td>
@@ -72,5 +96,4 @@
 			<% end %>
 		</tbody>
 	</table>
-</div>
-
+	<% end %>

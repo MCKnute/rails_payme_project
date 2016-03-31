@@ -1,5 +1,7 @@
 class DashboardsController < ApplicationController
 
+	
+
 	def index
 		@clients = Client.where(company: Company.find(session[:company_id]))
 		@unpaidvoices = Invoice.where(company: Company.find(session[:company_id]), paid_date: nil)

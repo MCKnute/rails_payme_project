@@ -18,7 +18,7 @@ class ClientsController < ApplicationController
   def create
     @client = Client.new(client_params)
     if @client.save
-      flash[:success] = "You have successfully registered as a client"
+      flash[:success] = "You have successfully registered a new client"
       redirect_to "/companies"
     else
       flash[:errors] = @client.errors.full_messages

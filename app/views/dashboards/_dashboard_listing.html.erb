@@ -1,31 +1,39 @@
-<h1>Listing of all clients</h1>
-<table class="table">
+<h2>Client List</h2>
+<% if @clients == [] %>
+	<h3>You currently have no clients!</h3>
+<% else %>
+<table class="table table-hover">
 	<thead>
 		<tr>
-			<td>Name</td>
-			<td>Address</td>
-			<td>APT/STE</td>
-			<td>City</td>
-			<td>State</td>
-			<td>Zip Code</td>
-			<td>Phone Number</td>
-			<td>Email</td>
+			<th>Name</th>
+			<th>Address</th>
+			<th>APT/Suite</th>
+			<th>City</th>
+			<th>State</th>
+			<th>Zip Code</th>
+			<th>Phone Number</th>
+			<th>Email</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
+
 	<tbody>
-		<% if @clients %>
-			<% @clients.each do |client| %></td>
+	<% @clients.each do |client| %>
 		<tr>
-			<td><%= client.name %></td>
-			<td><%= client.address_line1 %></td>
+			<td><a href="/companies/clients/<%= client.id %>"><%= client.name %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+			<td><%= render 'modal', :client => client %></td>
 			<td><%= client.address_line2 %></td>
 			<td><%= client.city %></td>
 			<td><%= client.state %></td>
 			<td><%= client.zip %></td>
 			<td><%= client.phone %></td>
 			<td><%= client.email %></td>
+			<td><button class="addNewinvoice btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#addModal" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-file" aria-hidden="true"></span> New Invoice
+				</button>
+				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
+			</td>
 		</tr>
-	</tbody>
 	<% end %>
-<% end %>
+	</tbody>
 </table>
+<% end %>

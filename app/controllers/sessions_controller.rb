@@ -29,11 +29,11 @@ class SessionsController < ApplicationController
   	if session[:company_id]
       session[:company_id] = nil
       flash[:success] = "You have successfully logged out"
-      redirect_to "/register"
+      redirect_to "/"
     else
       session[:client_id] = nil
       flash[:success] = "You have successfully logged out"
-      redirect_to "/register"
+      redirect_to "/"
     end
   end
 end
