@@ -27,9 +27,31 @@ class ClientsController < ApplicationController
   end
 
   def edit
+    if session[:client_id]
+      @client = Client.find(session[:client_id])
+    else 
+      @client = Client.find(params[:id])
+    end
   end
   
   def update
+    client = Client.find(params[:client_id])
+    if client.update(name: params[:name],
+                      address_line1: params[:address_line1],
+                      address_line2: params[:address_line2],
+                      city: params[:city], 
+                      state: params[:state],
+                      zip: params[:zip], 
+                      phone: params[:phone])
+      if session[:client_id]
+        redirect_to '/clients'
+      else 
+        redirect_to '/companies'
+      end
+    else
+      flash[:errors] = client.errors.full_messages
+      redirect_to :back
+    end
   end
 
   def destroy

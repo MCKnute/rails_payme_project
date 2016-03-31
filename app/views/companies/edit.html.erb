@@ -1,2 +1,11 @@
-<h1>Companies#edit</h1>
-<p>Find me in app/views/companies/edit.html.erb</p>
+<form action="/companies/update" method="post">
+	<%= token_tag nil %>
+	<label>Company Name: <input type="text" name="name" value="<%= @company.name %>"></label>
+	<label>Address: <input type="text" name="address_line1" value="<%= @company.address_line1%>"></label>
+	<input type="text" name="address_line2" value="<%= @company.address_line2%>">
+	<label>City: <input type="text" name="city" value="<%= @company.city%>"></label>
+	<label>State: <input type="text" name="state" value="<%= @company.state%>"></label>
+	<label>Zip Code: <input type="text" name="zip" value="<%= @company.zip%>"></label>
+	<label>Phone Number: <input type="text" name="phone" value="<%= @company.phone%>"></label>
+	<button>Update Info</button>
+</form>
