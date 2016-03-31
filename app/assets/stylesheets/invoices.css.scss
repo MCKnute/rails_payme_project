@@ -1,0 +1,26 @@
+// Place all the styles related to the Invoices controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#print_wrapper {
+	border: 1px solid #CCC;
+	padding: 4em;
+	margin-top: 2em;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print_wrapper, #print_wrapper * {
+    visibility: visible;
+    border: 0 transparent #FFF;
+  }
+  #print_wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+

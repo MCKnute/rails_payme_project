@@ -6,27 +6,42 @@
 
 	<thead>
 		<tr>
-			<th>Invoice #</th>
+			<th>ID</th>
+			<th>Status</th>
 			<th>Client Name</th>
 			<th>Date Paid</th>
 			<th>Amount Paid</th>
 			<th>Payment Method</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		<% @paidvoices.each do |paid| %>
 		<tr>
-			<td><%= paid.id %>
+			<td><a href="companies/invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+			<td>
+				<% if paid.paid_date < paid.due_by %>
+					<strong class="text-success">Paid On Time</strong>
+				<% elsif paid.paid_date > paid.due_by %>
+					<strong class="text-warning">Paid Late</strong>
+				<% end %>
+			</td>
 			<td><%= paid.client.name %></td>
-			<td><%= paid.paid_date %></td>
-			<td>$<%= paid.amount %></td>
+			<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
+			<td>$<%= number_to_currency(paid.amount) %></td>
 
 			<td>
 				<% if paid.check_payment %>
-					<span class="label label-info">Check #:</span> <%= paid.stripe_payment %>
+					<span class="text-success">Check #:</span> <%= paid.check_payment %>
 				<% elsif paid.stripe_payment %>
-					<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
+					<span class="text-success">Stripe ID:</span> <%= paid.stripe_payment %>
 				<% end %>
+			</td>
+			<td class="text-right">
+				<button class="btn btn-primary btn-sm" data-toggle="edit_modal<%= paid.id %>" data-target="#Invoice<%= paid.id %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Invoice
+				</button>
+				<button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Invoice
+				</button>
 			</td>
 		</tr>
 		<% end %>

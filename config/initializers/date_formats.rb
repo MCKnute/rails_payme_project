@@ -1,0 +1,1 @@
+Date::DATE_FORMATS[:mo_day_year] = '%b %e %Y'

@@ -1,3 +1,15 @@
+<% if session[:company_id] %>
+  <ol class="breadcrumb">
+    <li><a href="/companies">Company Dashboard</a></li>
+    <li class="active">Pay by Credit Card</li>
+  </ol>
+<% elsif session[:client_id] %>
+    <ol class="breadcrumb">
+      <li><a href="/clients">Client Dashboard</a></li>
+    <li class="active">Pay by Credit Card</li>
+  </ol>
+<% end %>
+
 <%= form_tag charges_path do %>
   <article>
     <% if flash[:error].present? %>
@@ -55,7 +67,7 @@
   </article>
 
 <form action="/charge" method="POST">
-  <!-- <%=token_tag nil %> -->
+  <!-- <%=token_tag nil %> -->cccc
   <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
   <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
   <script

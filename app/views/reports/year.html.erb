@@ -4,6 +4,12 @@
 		<li><a href="/companies/reports">Reports</a></li>
 		<li class="active">Year <%= params[:id] %></li>
 	</ol>
+<% elsif session[:client_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/clients">Client Dashboard</a></li>
+		<li><a href="/clients/reports">Reports</a></li>
+		<li class="active">Year <%= params[:id] %></li>
+	</ol>
 <% end %>
 
 	<h1 class="text-center"><%= @current_user.name %></h1>
@@ -54,6 +60,7 @@
 	<thead>
 		<tr>
 			<th>Invoice #</th>
+			<th>Status</th>
 			<th>Client Name</th>
 			<th>Date Paid</th>
 			<th>Payment Info</th>
@@ -63,9 +70,21 @@
 	<tbody>
 		<% @invoices.each do |paid| %>
 		<tr>
-			<td><%= paid.id %></td>
+			<% if session[:client_id] %>
+				<% @url_root = "/clients/invoices/" %>
+			<% elsif session[:session_id] %>
+				<% @url_root = "/companies/invoices/" %>
+			<% end %>
+			<td><a href="<%= @url_root %><%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+			<td>
+				<% if paid.paid_date < paid.due_by %>
+					<strong class="text-success">Paid On Time</strong>
+				<% elsif paid.paid_date > paid.due_by %>
+					<strong class="text-warning">Paid Late</strong>
+				<% end %>
+			</td>
 			<td><%= paid.client.name %></td>
-			<td><%= paid.paid_date %></td>
+			<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
 			<td>
 				<% if paid.check_payment %>
 					<span class="label label-info">Check #:</span> <%= paid.stripe_payment %>
@@ -73,12 +92,12 @@
 					<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
 				<% end %>
 			</td>
-			<td>$<%= paid.amount %></td>
+			<td><%= number_to_currency(paid.amount) %></td>
 		</tr>
 		<% end %>
 		<tr>
-			<td colspan="4" class="text-right" style="font-size: large">Total Earnings: </td>
-			<td style="font-weight: bold; font-size: large">$<%= @total %></td>
+			<td colspan="5" class="text-right" style="font-size: large">Total Earnings: </td>
+			<td style="font-weight: bold; font-size: large"><%= number_to_currency(@total) %></td>
 		</tr>
 	</tbody>
 </table>
