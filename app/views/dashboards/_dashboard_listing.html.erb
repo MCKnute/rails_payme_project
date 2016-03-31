@@ -12,7 +12,6 @@
 			<th>Actions</th>
 		</tr>
 	</thead>
-
 	<tbody>
 	<% @clients.each do |client| %>
 		<tr>
@@ -31,15 +30,15 @@
  
 				<a href="/companies/clients/<%= client.id %>/edit" class="btn btn-sm btn-primary" type="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Client</a>
 
-
+			<% if !Invoice.find_by(client: Client.find(client.id)) %>	
 			<form action='/companies/clients/<%= client.id %>' method='post' style="display: inline-block">
 		            <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 		            <input type="hidden" name="_method" value="delete">
 	                <button type='submit' class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Client</button>
 	            </form>
-				
-
-
+			<% else %>
+	                <button type='submit' class="btn btn-sm btn-danger delete_error"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Client</button>
+			<% end %>	
 	        </td>
 
 		</tr>
