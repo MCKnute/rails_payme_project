@@ -45,6 +45,7 @@ Rails.application.routes.draw do
 
   get '/companies' => 'dashboards#index'
 
+
   # resources :clients
 
   resources :dashboards

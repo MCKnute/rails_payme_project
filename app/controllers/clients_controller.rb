@@ -8,11 +8,11 @@ class ClientsController < ApplicationController
   def show
     if session[:client_id]
       @client = Client.find(session[:client_id])
-    else 
+    else  
       @client = Client.find(params[:id])
     end
     @out = Invoice.where(client_id: @client.id, paid_date: nil)
-    @paid = Invoice.where(client_id: @client.id).where.not(paid_date: nil)
+    @paid = Invoice.where(client_id: @client.id).where.not(paid_date: nil)  
   end
 
   def create

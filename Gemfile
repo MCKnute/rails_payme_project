@@ -35,6 +35,12 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'stripe'
 
+gem 'prawn' 
+
+# gem 'wicked_pdf'
+
+# gem 'wkhtmltopdf-binary'
+
 # gem "stripe_event"
 
 
