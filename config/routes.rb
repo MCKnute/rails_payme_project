@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   
   get 'clients' => 'clients#show'
 
-  get 'clients/:id' => 'clients#show'
+  get 'companies/clients/new' => 'clients#new'
 
   delete 'companies/clients/:id' => 'clients#destroy'
 
@@ -19,11 +19,11 @@ Rails.application.routes.draw do
   post 'clients/update' => 'clients#update'
 
   get 'companies/clients/:id' => 'clients#show'
-  
-  get 'companies/clients/new' => 'clients#new'
+
   
   post 'companies' => 'companies#create'
 
+  get 'clients/:id' => 'clients#show'
   get 'companies/edit' => 'companies#edit'
 
   post 'companies/update' => 'companies#update'
