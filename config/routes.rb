@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   
   get 'clients/:id' => 'clients#show'
 
+  delete 'companies/clients/:id' => 'clients#destroy'
+
   post 'clients/update' => 'clients#update'
 
   get 'companies/clients/:id/edit' => 'clients#edit'
@@ -33,6 +35,8 @@ Rails.application.routes.draw do
   resources :sessions
 
   get '/companies' => 'dashboards#index'
+
+  get 'companies/destroy' => 'clients#destroy'
 
   # resources :clients
 
