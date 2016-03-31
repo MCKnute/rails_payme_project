@@ -1,12 +1,54 @@
-<form action="/clients/update" method="post">
-	<%= token_tag nil %>
-	<input type="hidden" name="client_id" value="<%= @client.id%>">
-	<label>Company Name: <input type="text" name="name" value="<%= @client.name %>"></label>
-	<label>Address: <input type="text" name="address_line1" value="<%= @client.address_line1%>"></label>
-	<input type="text" name="address_line2" value="<%= @client.address_line2%>">
-	<label>City: <input type="text" name="city" value="<%= @client.city%>"></label>
-	<label>State: <input type="text" name="state" value="<%= @client.state%>"></label>
-	<label>Zip Code: <input type="text" name="zip" value="<%= @client.zip%>"></label>
-	<label>Phone Number: <input type="text" name="phone" value="<%= @client.phone%>"></label>
-	<button>Update Info</button>
-</form>
+<% if session[:company_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/companies">Company Dashboard</a></li>
+		<li class="active">Edit Client Info</li>
+	</ol>
+<% elsif session[:client_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/clients">Clients Dashboard</a></li>
+		<li class="active"> Edit Client Info</li>
+	</ol>
+<% end %>
+
+<h1 class="text-center">Edit <%= @client.name %></h1>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+
+		<form action="/clients/update" method="post">
+			<%= token_tag nil %>
+			<input type="hidden" name="client_id" class="form-control" value="<%= @client.id%>">
+			<div class="form-group">
+			<label>Company Name: </label>
+				<input type="text" name="name" class="form-control" value="<%= @client.name %>">
+			</div>
+			<div class="form-group">
+				<label>Address: </label>
+				<input type="text" name="address_line1" class="form-control" value="<%= @client.address_line1%>">
+			</div>
+			<div class="form-group">
+				<label>Address Line 2 (Optional):</label>
+				<input type="text" name="address_line2" class="form-control" value="<%= @client.address_line2%>">
+			</div>
+			<div class="form-group">
+				<label>City: </label>
+				<input type="text" name="city" class="form-control" value="<%= @client.city%>">
+			</div>
+			<div class="form-group">
+				<label>State: </label>
+				<input type="text" name="state" class="form-control" value="<%= @client.state%>">
+			</div>
+			<div class="form-group">
+				<label>Zip Code: </label>
+				<input type="text" name="zip" class="form-control" value="<%= @client.zip%>">
+			</div>
+			<div class="form-group">
+				<label>Phone Number:</label>
+				<input type="text" name="phone" class="form-control" value="<%= @client.phone%>">
+			</div>
+			<div class="form-group">
+				<button class="center-block btn btn-lg btn-warning">Update Client Info <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+			</div>
+		</form>
+	</div>
+</div>

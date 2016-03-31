@@ -7,37 +7,39 @@
 		<tr>
 			<th>Name</th>
 			<th>Address</th>
-			<th>APT/Suite</th>
-			<th>City</th>
-			<th>State</th>
-			<th>Zip Code</th>
 			<th>Phone Number</th>
 			<th>Email</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
-
 	<tbody>
 	<% @clients.each do |client| %>
 		<tr>
 			<td><a href="/companies/clients/<%= client.id %>"><%= client.name %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
 			<td><%= render 'modal', :client => client %></td>
-			<td><%= client.address_line2 %></td>
-			<td><%= client.city %></td>
-			<td><%= client.state %></td>
-			<td><%= client.zip %></td>
 			<td><%= client.phone %></td>
 			<td><%= client.email %></td>
-			<td><button class="addNewinvoice btn btn-success pull-right btn-sm" data-toggle="modal" data-target="#addInvoiceModal<%= client.id %>" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-file" aria-hidden="true"></span> New Invoice
+
+			<td class="text-right" style="">
+
+				<button class="addNewinvoice btn btn-success btn-sm" data-toggle="modal" data-target="#addInvoiceModal<%= client.id %>" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-file" aria-hidden="true"></span> New Invoice
 				</button>
+
+
 				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
-			</td>			
-			<td><a href="/companies/clients/<%= client.id %>/edit" class="btn btn-lg btn-primary">Update Info</a></td>
-			<td><form action='/companies/clients/<%= client.id %>' method='post'>
-	            <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
-	            <input type="hidden" name="_method" value="delete">
-                <button type='submit' class="btn btn-sm btn-default">Delete Client</button>
-	            </form></td>
+ 
+				<a href="/companies/clients/<%= client.id %>/edit" class="btn btn-sm btn-primary" type="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Client</a>
+
+			<% if !Invoice.find_by(client: Client.find(client.id)) %>	
+			<form action='/companies/clients/<%= client.id %>' method='post' style="display: inline-block">
+		            <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+		            <input type="hidden" name="_method" value="delete">
+	                <button type='submit' class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Client</button>
+	            </form>
+			<% else %>
+	                <button type='submit' class="btn btn-sm btn-danger delete_error"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Client</button>
+			<% end %>	
+	        </td>
 
 		</tr>
 	<% end %>

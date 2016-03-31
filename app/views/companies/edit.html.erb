@@ -1,11 +1,48 @@
-<form action="/companies/update" method="post">
-	<%= token_tag nil %>
-	<label>Company Name: <input type="text" name="name" value="<%= @company.name %>"></label>
-	<label>Address: <input type="text" name="address_line1" value="<%= @company.address_line1%>"></label>
-	<input type="text" name="address_line2" value="<%= @company.address_line2%>">
-	<label>City: <input type="text" name="city" value="<%= @company.city%>"></label>
-	<label>State: <input type="text" name="state" value="<%= @company.state%>"></label>
-	<label>Zip Code: <input type="text" name="zip" value="<%= @company.zip%>"></label>
-	<label>Phone Number: <input type="text" name="phone" value="<%= @company.phone%>"></label>
-	<button>Update Info</button>
-</form>
+<% if session[:company_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/companies">Company Dashboard</a></li>
+		<li class="active">Edit Company Info</li>
+	</ol>
+<% end %>
+
+<h1 class="text-center">Edit <%= @current_user.name %></h1>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+
+		<form action="/companies/update" method="post">
+			<%= token_tag nil %>
+			<div class="form-group">
+				<label for="company[name]">Company Name: </label>
+					<input type="text" name="name" class="form-control" value="<%= @company.name %>">
+			</div>
+			<div class="form-group">
+				<label>Address Line 1: </label>
+					<input type="text" class="form-control" name="address_line1" value="<%= @company.address_line1%>">
+			</div>
+			<div class="form-group">
+				<label>Address Line 2 (Optional): </label>
+					<input type="text" name="address_line2"  class="form-control" value="<%= @company.address_line2%>">
+			</div>
+			<div class="form-group">
+				<label>City: </label>
+					<input type="text" name="city"  class="form-control" value="<%= @company.city%>">
+			</div>
+			<div class="form-group">
+				<label>State: </label>
+					<input type="text" name="state"  class="form-control" value="<%= @company.state%>">
+			</div>
+			<div class="form-group">
+				<label>Zip Code: </label>
+					<input type="text" name="zip"  class="form-control" value="<%= @company.zip%>">
+			</div>
+			<div class="form-group">
+				<label>Phone Number: </label>
+					<input type="text" name="phone"  class="form-control" value="<%= @company.phone%>">
+			</div>
+			<div class="form-group">
+				<button class="btn btn-lg btn-primary center-block">Update Info</button>
+			</div>
+		</form>
+	</div>
+</div>
