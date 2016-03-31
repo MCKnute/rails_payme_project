@@ -29,10 +29,10 @@
 					<strong class="text-warning">Due Today</strong>
 				<% end %>
 			</td>
-			<td><%= unpaid.sendDate %></td>
-			<td><%= unpaid.due_by %></td>
+			<td><%= unpaid.sendDate.to_formatted_s(:mo_day_year) %></td>
+			<td><%= unpaid.due_by.to_formatted_s(:mo_day_year) %></td>
 			<td><%= unpaid.client.name %></td>
-			<td>$<%= unpaid.amount %></td>
+			<td>$<%= number_to_currency(unpaid.amount) %></td>
 			<td class="text-right">
 				<button class="btn btn-success btn-sm" data-toggle="check_modal<%= unpaid.id %>" data-target="#addCheck<%= unpaid.id %>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong>&#36;</strong> Record Check
 				</button>

@@ -84,7 +84,7 @@
 				<% end %>
 			</td>
 			<td><%= paid.client.name %></td>
-			<td><%= paid.paid_date %></td>
+			<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
 			<td>
 				<% if paid.check_payment %>
 					<span class="label label-info">Check #:</span> <%= paid.stripe_payment %>
@@ -92,12 +92,12 @@
 					<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
 				<% end %>
 			</td>
-			<td>$<%= paid.amount %></td>
+			<td><%= number_to_currency(paid.amount) %></td>
 		</tr>
 		<% end %>
 		<tr>
 			<td colspan="5" class="text-right" style="font-size: large">Total Earnings: </td>
-			<td style="font-weight: bold; font-size: large">$<%= @total %></td>
+			<td style="font-weight: bold; font-size: large"><%= number_to_currency(@total) %></td>
 		</tr>
 	</tbody>
 </table>

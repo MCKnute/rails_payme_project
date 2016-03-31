@@ -25,14 +25,14 @@ body {
 	text-align: center
 }
 
-//#welcome_splash {
-//	color: white;
-//	font-weight: bold;
-//	background-image: url('splash_packing.jpg');
-//	background-size:     cover;                      
-//  background-repeat:   no-repeat;
-//    background-position: center center;
-//}
+#welcome_splash {
+	min-height: 450px;
+	font-weight: bold;
+	background-image: url('welcome_splash.jpg');
+	background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center bottom;
+}
 
 footer {
 	text-align: center

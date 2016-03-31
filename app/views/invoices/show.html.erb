@@ -51,10 +51,10 @@
       </address>
     </div>
 
-    <div class="col-md-3 col-md-offset-3" style="display:inline-block; float: right">
+    <div class="col-md-4 col-md-offset-2" style="display:inline-block; float: right">
       <h5 style="font-weight:bold">Invoice # <%= @invoice.id %></h5>
-      <strong>Send Date:</strong> <%= @invoice.sendDate %><br />
-      <strong>Due Date:</strong> <%= @invoice.due_by %><br />
+      <strong>Send Date:</strong> <%= @invoice.sendDate.to_formatted_s(:long) %><br />
+      <strong>Due Date:</strong> <%= @invoice.due_by.to_formatted_s(:long) %><br />
     </div>
   </div>
 
@@ -73,7 +73,9 @@
 
     <div class="col-md-6" style="display:inline-block; float: right">
       <% if @invoice.paid_date %>
-      <div style="border: 3px solid darkgreen; color: darkgreen; border-radius: 10px; text-align: center; padding: 1em; font-size: xx-large; background-color: lightgreen">PAID on <%= @invoice.paid_date %></div>
+      <div style="border: 3px solid darkgreen; color: darkgreen; border-radius: 10px; text-align: center; padding: .5em; font-size: xx-large; background-color: lightgreen">
+        PAID on <br />
+        <%= @invoice.paid_date.to_formatted_s(:long) %></div>
       <% end %>
     </div>
 
@@ -93,11 +95,11 @@
           <tbody>
             <tr>
               <td><%= @invoice.description %></td>
-              <td>$<%= @invoice.amount %></td>
+              <td><%= number_to_currency(@invoice.amount) %></td>
             </tr>
             <tr style="font-size: large; font-weight: bold">
               <td class="text-right">TOTAL DUE:</td>
-              <td>$<%= @invoice.amount %></td>
+              <td><%= number_to_currency(@invoice.amount) %></td>
             </tr>
           </tbody>
         </table>
