@@ -68,7 +68,12 @@
 	<tbody>
 		<% @invoices.each do |paid| %>
 		<tr>
-			<td><%= paid.id %></td>
+			<% if session[:client_id] %>
+				<% @url_root = "/clients/invoices/" %>
+			<% elsif session[:session_id] %>
+				<% @url_root = "/companies/invoices/" %>
+			<% end %>
+			<td><a href="<%= @url_root %><%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
 			<td><%= paid.client.name %></td>
 			<td><%= paid.paid_date %></td>
 			<td>

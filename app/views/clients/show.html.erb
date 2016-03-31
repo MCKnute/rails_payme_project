@@ -10,7 +10,7 @@
 <% end %>
 
 
-<h1>
+<h1 class="text-center">
 	<% if session[:company_id] %>
 		Client Info: 
 	<% elsif session[:client_id] %>
@@ -52,7 +52,7 @@
 		<% if  %>
 			<% @out.each do |out| %>
 				<tr>
-					<td><%= out.id %></td>
+					<td><a href="/clients/invoices/<%= out.id %>"><%= out.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> </a></td>
 					<td><%= out.sendDate%></td>
 					<td><%= out.due_by%></td>
 					<td><%= out.description %></td>
@@ -87,19 +87,23 @@
 				<th>Paid Date</th>
 				<th>Description</th>
 				<th>Amount</th>
-				<th>Actions</th>
+				<th>Paid By</th>
 
 			</tr>
 		</thead>
 		<tbody>
 			<% @paid.each do |paid| %>
 				<tr>
-					<td><%= paid.id %></td>
+					<td><a href="/clients/invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> </a></td>
 					<td><%= paid.paid_date %></td>
 					<td><%= paid.description %></td>
 					<td>$<%= paid.amount %></td>
 					<td>
-						<button class="btn btn-info btn-sm"><span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> View</button>
+						<% if paid.check_payment %>
+							<span class="label label-info">Check #:</span> <%= paid.check_payment %>
+						<% elsif paid.stripe_payment %>
+							<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
+						<% end %>
 					</td>
 				</tr>
 			<% end %>

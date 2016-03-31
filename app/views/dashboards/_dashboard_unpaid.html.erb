@@ -5,22 +5,34 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
+			<th>ID</th>
+			<th>Status</th>
 			<th>Client Name</th>
 			<th>Send Date</th>
 			<th>Due Date</th>
 			<th>Amount Due</th>
-			<th>Description</th>
 			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr>
 		<% @unpaidvoices.each do |unpaid| %></td>
-			<td><%= unpaid.client.name %></td>
+			<td><a href="companies/invoices/<%= unpaid.id %>"><%= unpaid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+			<td>
+				<% if Date.today < unpaid.sendDate %>
+					<strong class="text-muted">Not Sent</strong>
+				<% elsif Date.today < unpaid.due_by %>
+					<strong class="text-success">Current</strong>
+				<% elsif Date.today > unpaid.due_by %>
+					<strong class="text-danger">Overdue</strong>
+				<% elsif Date.today == unpaid.due_by %>
+					<strong class="text-warning">Due Today</strong>
+				<% end %>
+			</td>
 			<td><%= unpaid.sendDate %></td>
 			<td><%= unpaid.due_by %></td>
+			<td><%= unpaid.client.name %></td>
 			<td>$<%= unpaid.amount %></td>
-			<td><%= unpaid.description %></td>
 			<td class="text-right">
 				<button class="btn btn-success btn-sm" data-toggle="check_modal<%= unpaid.id %>" data-target="#addCheck<%= unpaid.id %>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong>&#36;</strong> Record Check
 				</button>
