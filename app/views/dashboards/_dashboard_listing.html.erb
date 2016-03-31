@@ -35,6 +35,11 @@
 				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
 			</td>			
 			<td><a href="/companies/clients/<%= client.id %>/edit" class="btn btn-lg btn-primary">Update Info</a></td>
+			<td><form action='/companies/clients/<%= client.id %>' method='post'>
+	            <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+	            <input type="hidden" name="_method" value="delete">
+                <button type='submit' class="btn btn-sm btn-default">Delete Client</button>
+	            </form></td>
 		</tr>
 	<% end %>
 	</tbody>
