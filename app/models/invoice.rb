@@ -10,7 +10,7 @@ class Invoice < ActiveRecord::Base
   	if due_by.present? && due_by < Date.today 
        errors.add(:due_by, "Your date can't be in the past nor be before the Send Date")
     end
-    if sendDate.present? && sendDate < Date.today 
+    if sendDate.present? && sendDate >= Date.today 
   	   errors.add(:sendDate, "Your date can't be in the past")
   	end
   end

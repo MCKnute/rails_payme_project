@@ -44,7 +44,6 @@ Rails.application.routes.draw do
 
 
 
-
   get '/register' => 'companies#new', as: :this_new_company
 
   delete '/sessions' => 'sessions#destroy'
@@ -54,6 +53,8 @@ Rails.application.routes.draw do
   get '/companies' => 'dashboards#index', as: :companies_main
 
   get 'companies/destroy' => 'clients#destroy'
+
+  patch 'invoices/add/:id' => 'invoices#addCheck'
 
   # resources :clients
 

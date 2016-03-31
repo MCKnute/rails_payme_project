@@ -30,7 +30,7 @@
 				<div class="modal-footer">
 		    <a href="">
 			    	<%= token_tag nil %>
-			    	<button type="submit" class="btn btn-success center-block"> Cancel <span aria-hidden="true"></span></button></a>
+			    	<button type="submit" class="btn btn-warning center-block"> Cancel <span aria-hidden="true"></span></button></a>
 	    	<form action="/companies/clients/<%= client.id %>" method="post">
 			    	<%= token_tag nil %>
 					<input type="hidden" name="_method" value="delete">
