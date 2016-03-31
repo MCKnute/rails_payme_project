@@ -15,4 +15,8 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require_tree .
-   
+$(document).ready(function() {
+	$('.delete_error').click(function() { 
+		alert('Cannot delete user.  Please delete all associated invoices then try again.'); 
+	});
+});	

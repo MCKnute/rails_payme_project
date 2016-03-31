@@ -45,3 +45,24 @@ footer {
 	padding-right: 1em;
 	color: #CCC;
 }
+
+.breadcrumb {
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.navbar-brand {
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+
+#invoice_wrapper {
+	border: 1px solid #CCC;
+	padding: 4em;
+	margin-top: 2em;
+}
+
+.btn-print {
+	background-color: #AAA;
+	color: #FFF;
+}

@@ -1,14 +1,20 @@
 Rails.application.routes.draw do
+  
+  root 'welcome#index'
+
 
   # get 'clients' => 'clients#show'
 
-  get "clients/:id" => "clients#show"
 
   post 'clients/create' => 'clients#create'
   
   get 'clients' => 'clients#show'
 
+  get 'companies/clients/new' => 'clients#new'
+
   get 'clients/:id' => 'clients#show'
+
+  delete 'companies/clients/:id' => 'clients#destroy'
 
   post 'clients' => 'clients#create'
 
@@ -16,26 +22,28 @@ Rails.application.routes.draw do
 
   post 'clients/update' => 'clients#update'
 
-  get 'companies/clients/:id' => 'clients#show'
+  get 'companies/clients/:id' => 'clients#show' 
   
-  get 'companies/clients/new' => 'clients#new'
+  get 'companies/clients/:id/edit' => 'clients#edit'
   
   post 'companies' => 'companies#create'
 
   get 'companies/edit' => 'companies#edit'
 
-  post 'companies/update' => 'companies#update'
-
-  get '/companies/reports' => 'reports#index'
+  get '/companies/reports' => 'reports#year'
 
   get '/companies/reports/1st' => 'reports#oneq'
-
   get '/companies/reports/2nd' => 'reports#twoq'
   get '/companies/reports/3rd' => 'reports#threeq'
   get '/companies/reports/4th' => 'reports#fourq'
 
 
-  root 'welcome#index'
+
+  get '/companies/reports/quarter/:id/:id2' => 'reports#quarter'
+  get '/companies/reports/year/:id' => 'reports#year'
+
+
+
 
   get '/register' => 'companies#new', as: :this_new_company
 
@@ -43,7 +51,9 @@ Rails.application.routes.draw do
   
   resources :sessions
 
-  get '/companies' => 'dashboards#index'
+  get '/companies' => 'dashboards#index', as: :companies_main
+
+  get 'companies/destroy' => 'clients#destroy'
 
 
   # resources :clients
@@ -51,6 +61,10 @@ Rails.application.routes.draw do
   resources :dashboards
 
   resources :charges
+
+  get 'companies/invoices/:id' => 'invoices#show' 
+
+  get 'clients/invoices/:id' => 'invoices#show'  
 
   resources :invoices
 

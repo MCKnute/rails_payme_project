@@ -1,48 +1,69 @@
-<div class="text-center">
-	<h1> <span style="color:#73C5E8"><%= @company.name %></span> Reports</h1>
+<% if session[:company_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/companies">Company Dashboard</a></li>
+		<li class="active">Reports</li>
+	</ol>
+<% end %>
+
+	<h1 class="text-center"><%= @company.name %></h1>
+	<h2 class="text-center">Reports</h2>
+
+
+<div style="row">
+	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
+		<ul class="nav nav-pills">
+		  <li role="report_yearly" class="disabled" style="min-width: 215px"><a href="#">Yearly Earnings: </a></li>
+		  <li role="report_yearly"><a href="/companies/reports/year/2015">2015</a></li>
+		  <li role="report_yearly" class="active"><a href="/companies/reports/year/">2016</a></li>
+		</ul>
+	</div>
 </div>
 
-<div class="text-center">
-	<h3>Total Paid Invoice for 2016: <span style="color:#1AC262"><%= @total %></span></h3>
-</div>
-<div class="text-center">
-	<h4>Quaterly: 
-	<a href="/companies/reports/1st" class="btn btn-sm btn-warning">1st</a> 
-	<a href="/companies/reports/2nd" class="btn btn-sm btn-warning">2nd</a> 
-	<a href="/companies/reports/3rd" class="btn btn-sm btn-warning">3rd</a> 
-	<a href="/companies/reports/4th" class="btn btn-sm btn-warning">4th</a> 
-	</h4>
+<div style="row">
+	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
+		<ul class="nav nav-pills">
+		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#">2016 Quarterly Earnings: </a></li>
+		  <li role="report_quarterly"><a href="/companies/reports/1st">1st Quarter</a></li>
+		  <li role="report_quarterly"><a href="/companies/reports/2st">2nd Quarter</a></li>
+		  <li role="report_quarterly"><a href="/companies/reports/3st">3rd Quarter</a></li>
+		  <li role="report_quarterly"><a href="/companies/reports/4st">4th Quarter</a></li>
+		</ul>
+	</div>
 </div>
 
-<div class="text-center">
-	<a href="/companies" class="btn btn-sm btn-warning">Home</a> 
-</div>
-<p></p>
+
+
 <% if @invoices == [] %>
-	<h3>You currently have no paid Invoices.</h3>
+	<h3 style="text-center">You currently have no paid Invoices.</h3>
 <% else %>
-<table class="table table-striped">
-
+<table class="table table-hover">
 	<thead>
 		<tr>
-			<td>Client Name</td>
-			<td>Amount Paid</td>
-			<td>Stripe Payment ID</td>
-			<td>Check #</td>
-			<td>Date Paid</td>
+			<th>Client Name</th>
+			<th>Date Paid</th>
+			<th>Payment Info</th>
+			<th>Amount Paid</th>
 		</tr>
 	</thead>
 	<tbody>
 		<% @invoices.each do |paid| %>
 		<tr>
 			<td><%= paid.client.name %></td>
-			<td>$<%= paid.amount %></td>
-			<td><%= paid.stripe_payment %></td>
-			<td><%= paid.check_payment %></td>
 			<td><%= paid.paid_date %></td>
+			<td>
+				<% if paid.check_payment %>
+					<span class="label label-info">Check #:</span> <%= paid.stripe_payment %>
+				<% elsif paid.stripe_payment %>
+					<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
+				<% end %>
+			</td>
+			<td>$<%= paid.amount %></td>
 		</tr>
 		<% end %>
+		<tr>
+			<td colspan="3" class="text-right">Total Earnings: </td>
+			<td style="font-weight: bold">$<%= @total %></td>
+		</tr>
 	</tbody>
-<% end %>
 </table>
-
+<% end %>

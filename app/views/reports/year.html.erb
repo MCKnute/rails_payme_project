@@ -1,0 +1,85 @@
+<% if session[:company_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/companies">Company Dashboard</a></li>
+		<li><a href="/companies/reports">Reports</a></li>
+		<li class="active">Year <%= params[:id] %></li>
+	</ol>
+<% end %>
+
+	<h1 class="text-center"><%= @current_user.name %></h1>
+	<h2 class="text-center">Year <%= params[:id]%> Report</h2>
+
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
+		<ul class="nav nav-pills">
+		  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly Earnings: </a></li>
+		  <li role="report_yearly"
+		  <% if params[:id].to_s == "2015"%>
+		  class="active" 
+		  <% end %>
+		  ><a href="/companies/reports/year/2015">2015</a></li>
+		  <li role="report_yearly"
+		  <% if params[:id].to_s == "2016"%>
+		  class="active" 
+		  <% end %>
+		  ><a href="/companies/reports/year/2016">2016</a></li>
+
+		</ul>
+	</div>
+
+</div>
+
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
+		<ul class="nav nav-pills">
+		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#"><%= params[:id] %> Quarterly Earnings: </a></li>
+		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
+		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/2">2nd Quarter</a></li>
+		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/3">3rd Quarter</a></li>
+		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/4">4th Quarter</a></li>
+		</ul>
+	</div>
+
+</div>
+
+
+
+
+<% if @invoices == [] %>
+	<h3 class="text-center">You currently have no paid invoices for this time period.</h3>
+<% else %>
+<table class="table table-hover">
+	<thead>
+		<tr>
+			<th>Invoice #</th>
+			<th>Client Name</th>
+			<th>Date Paid</th>
+			<th>Payment Info</th>
+			<th>Amount Paid</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @invoices.each do |paid| %>
+		<tr>
+			<td><%= paid.id %></td>
+			<td><%= paid.client.name %></td>
+			<td><%= paid.paid_date %></td>
+			<td>
+				<% if paid.check_payment %>
+					<span class="label label-info">Check #:</span> <%= paid.stripe_payment %>
+				<% elsif paid.stripe_payment %>
+					<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
+				<% end %>
+			</td>
+			<td>$<%= paid.amount %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td colspan="4" class="text-right" style="font-size: large">Total Earnings: </td>
+			<td style="font-weight: bold; font-size: large">$<%= @total %></td>
+		</tr>
+	</tbody>
+</table>
+<% end %>
