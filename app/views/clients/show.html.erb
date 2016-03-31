@@ -63,7 +63,15 @@
 							<input type="hidden" name="invoice_amt" value="<%= out.amount %>">
 							<button type="submit" class="btn btn-info btn-sm"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Credit Card</button>
 						</form>
-						<button class="btn btn-info btn-sm"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Check</button>
+						<a class="btn btn-info btn-sm"
+
+						<% if session[:client_id] %>
+						  onclick="alert('Please print out your invoice and mail it to us with your check payment.');" 
+						  <% @folder_root = '/clients' %>
+						<% elsif session[:company_id] %>
+						  onclick="alert('Testing');"
+						  <% @folder_root = '/companies' %> 
+						<% end %> href="<%= @folder_root %>/invoices/<%=out.id %>" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Check</a>
 					</td>
 				</tr>
 			<% end %>

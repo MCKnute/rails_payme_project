@@ -15,7 +15,7 @@
 <div class="row text-center">
   <div class="col-md-12">
 
-    <button class="btn btn-print btn-lg"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Print Invoice</button>
+    <a href="#" onclick="window.print();return false;" class="btn btn-print btn-lg" type="button"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print Invoice</a>
 
       <form action="/charges/new" style="display: inline-block">
         <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
@@ -23,7 +23,13 @@
         <button type="submit" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pay By Credit Card</button>
       </form>
 
-      <button class="btn btn-info btn-lg"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Pay By Check</button>
+      <button class="btn btn-info btn-lg" 
+      <% if session[:client_id] %>
+        onclick="alert('Please print out your invoice and mail it to us with your check payment.');" 
+      <% elsif session[:company_id] %>
+        onclick="alert('Testing');" 
+      <% end %>
+      > <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Pay By Check</button>
     </div>
   </div>
 
