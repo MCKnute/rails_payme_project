@@ -1,0 +1,97 @@
+<% if session[:company_id] %>
+  <ol class="breadcrumb">
+    <li><a href="/companies">Company Dashboard</a></li>
+    <li class="active">Invoice #<%= params[:id] %></li>
+  </ol>
+<% elsif session[:client_id] %>
+    <ol class="breadcrumb">
+    <li><a href="/clients">Client Dashboard</a></li>
+    <li class="active">Invoice #<%= params[:id] %></li>
+  </ol>
+<% end %>
+
+<h1 class="text-center">Invoice #<%= @invoice.id %> View</h1>
+
+<div class="row text-center">
+  <div class="col-md-12">
+
+    <button class="btn btn-print btn-lg"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Print Invoice</button>
+
+      <form action="/charges/new" style="display: inline-block">
+        <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
+        <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
+        <button type="submit" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pay By Credit Card</button>
+      </form>
+
+      <button class="btn btn-info btn-lg"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Pay By Check</button>
+    </div>
+  </div>
+
+<div id="invoice_wrapper" class="col-md-10 col-md-offset-1">
+  <h1 class="text-center">INVOICE</h1>
+
+  <div class="row" >
+    <div class="col-md-6">
+      <h5>From:</h5>
+      <address>
+        <strong><%= @invoice.company.name %></strong><br />
+        <%= @invoice.company.address_line1 %><br />  
+        <% if @invoice.company.address_line2 != "" %>
+          <%= @invoice.company.address_line2 %><br />
+        <% end %>
+        <%= @invoice.company.city %>, <%= @invoice.company.state %> <%= @invoice.company.zip %><br />
+        <%= @invoice.company.email %><br /> 
+        <%= @invoice.company.phone %><br /> 
+      </address>
+    </div>
+
+    <div class="col-md-3 col-md-offset-3">
+      <h5 style="font-weight:bold">Invoice # <%= @invoice.id %></h5>
+      <strong>Send Date:</strong> <%= @invoice.sendDate %><br />
+      <strong>Due Date:</strong> <%= @invoice.due_by %><br />
+    </div>
+  </div>
+
+  <div class="row" >
+    <div class="col-md-12">
+      <h5>Bill To:</h5>
+      <address>
+        <strong><%= @invoice.client.name %></strong><br />
+        <%= @invoice.client.address_line1 %><br />  
+        <% if @invoice.client.address_line2 != "" %>
+          <%= @invoice.client.address_line2 %><br />
+        <% end %>
+        <%= @invoice.client.city %>, <%= @invoice.client.state %> <%= @invoice.client.zip %><br />
+      </address>
+    </div>
+
+</div>
+    <h4 class="text-center">Invoice Item</h4>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 80%; background-color: #CCC">Item Description</th>
+              <th style="width: 20%; background-color: #CCC">Total Price</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><%= @invoice.description %></td>
+              <td>$<%= @invoice.amount %></td>
+            </tr>
+            <tr style="font-size: large; font-weight: bold">
+              <td class="text-right">TOTAL DUE:</td>
+              <td>$<%= @invoice.amount %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5 class="text-center">Thank you for using <%= @invoice.company.name %></h5>
+      </div>
+    </div>
+  </div>
+</div>
