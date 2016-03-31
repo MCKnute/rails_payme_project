@@ -53,7 +53,7 @@ Rails.application.routes.draw do
   
   resources :sessions
 
-  get '/companies' => 'dashboards#index'
+  get '/companies' => 'dashboards#index', as: :companies_main
 
   get 'companies/destroy' => 'clients#destroy'
 

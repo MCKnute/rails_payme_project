@@ -71,9 +71,11 @@ class ReportsController < ApplicationController
     elsif params[:id2].to_s === "4"
       @startdate = params[:id]+"-10-01"
       @enddate = params[:id]+"-12-31"
-    elsif params[:id2].to_s > "4"
-      flash[:errors] = ["You can only view quarters numbered between 1 and 4"]
-      redirect_to '/companies'
+    else
+      flash[:errors] = ["You can only view quarters numbered between 1 and 4. Redirecting to Quarter 1."]
+      @startdate = params[:id]+"-01-01"
+      @enddate = params[:id]+"-03-31"
+      params[:id2] = "1"
     end
     @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date) 
     @total = @invoices.sum(:amount)
