@@ -3,14 +3,26 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
 
-  post 'clients/create' => 'clients#create'
+  # get 'clients' => 'clients#show'
 
+
+  post 'clients/create' => 'clients#create'
   
   get 'clients' => 'clients#show'
+
+  get 'companies/clients/new' => 'clients#new'
+
+  get 'clients/:id' => 'clients#show'
+
+  delete 'companies/clients/:id' => 'clients#destroy'
+
   post 'clients' => 'clients#create'
 
-  
-  get 'companies/clients/new' => 'clients#new'
+  get 'companies/clients/:id/edit' => 'clients#edit'
+
+  post 'clients/update' => 'clients#update'
+
+  get 'companies/clients/:id' => 'clients#show'  
   
   get 'companies/clients/:id/edit' => 'clients#edit'
   
@@ -18,13 +30,21 @@ Rails.application.routes.draw do
   
   post 'companies' => 'companies#create'
 
-  post 'clients/update' => 'clients#update'
-
-  get "clients/:id" => "clients#show"
-
   get 'companies/edit' => 'companies#edit'
 
-  post 'companies/update' => 'companies#update'
+  get '/companies/reports' => 'reports#year'
+
+  get '/companies/reports/1st' => 'reports#oneq'
+  get '/companies/reports/2nd' => 'reports#twoq'
+  get '/companies/reports/3rd' => 'reports#threeq'
+  get '/companies/reports/4th' => 'reports#fourq'
+
+
+
+  get '/companies/reports/quarter/:id/:id2' => 'reports#quarter'
+  get '/companies/reports/year/:id' => 'reports#year'
+
+
 
 
   get '/register' => 'companies#new', as: :this_new_company
@@ -35,11 +55,16 @@ Rails.application.routes.draw do
 
   get '/companies' => 'dashboards#index'
 
+  get 'companies/destroy' => 'clients#destroy'
+
   # resources :clients
 
   resources :dashboards
 
+  resources :charges
+
   resources :invoices
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

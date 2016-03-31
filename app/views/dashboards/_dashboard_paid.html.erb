@@ -2,23 +2,34 @@
 <% if @paidvoices == [] %>
 	<h4>You currently have no paid Invoices.</h4>
 <% else %>
-<table class="table table-striped table-hover">
+<table class="table table-hover">
 
 	<thead>
 		<tr>
+			<th>Invoice #</th>
 			<th>Client Name</th>
-			<th>Amount Paid</th>
 			<th>Date Paid</th>
+			<th>Amount Paid</th>
+			<th>Payment Method</th>
 		</tr>
 	</thead>
 	<tbody>
+		<% @paidvoices.each do |paid| %>
 		<tr>
-		<% @paidvoices.each do |paid| %></td>
+			<td><%= paid.id %>
 			<td><%= paid.client.name %></td>
-			<td>$<%= paid.amount %></td>
 			<td><%= paid.paid_date %></td>
+			<td>$<%= paid.amount %></td>
+
+			<td>
+				<% if paid.check_payment %>
+					<span class="label label-info">Check #:</span> <%= paid.stripe_payment %>
+				<% elsif paid.stripe_payment %>
+					<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
+				<% end %>
+			</td>
 		</tr>
+		<% end %>
 	</tbody>
-	<% end %>
 <% end %>
 </table>

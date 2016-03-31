@@ -20,12 +20,28 @@
 			<td><%= render 'modal', :client => client %></td>
 			<td><%= client.phone %></td>
 			<td><%= client.email %></td>
-			<td class="text-right">
-				<button class="addNewinvoice btn btn-success btn-sm" data-toggle="modal" data-target="#addModal"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-file" aria-hidden="true"></span> New Invoice
+
+			<td class="text-right" style="">
+
+				<button class="addNewinvoice btn btn-success btn-sm" data-toggle="modal" data-target="#addInvoiceModal<%= client.id %>" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><span class="glyphicon glyphicon-file" aria-hidden="true"></span> New Invoice
 				</button>
+
+
 				<%= render partial: "dashboard_addinvoice", locals: { client: client } %>
+ 
 				<a href="/companies/clients/<%= client.id %>/edit" class="btn btn-sm btn-primary" type="button"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Client</a>
-			</td>
+
+
+			<form action='/companies/clients/<%= client.id %>' method='post' style="display: inline-block">
+		            <input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
+		            <input type="hidden" name="_method" value="delete">
+	                <button type='submit' class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Client</button>
+	            </form>
+				
+
+
+	        </td>
+
 		</tr>
 	<% end %>
 	</tbody>

@@ -55,10 +55,8 @@ class ClientsController < ApplicationController
   end
 
   def destroy
-    session[:client_id]
-    session[:client_id] = nil
-    session.clear
-    redirect_to "/sessions"
+    client = Client.find(params[:id]).destroy
+    redirect_to :back
   end
 
   private
