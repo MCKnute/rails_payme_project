@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get 'companies/clients/:id/edit' => 'clients#edit'
 
   post 'clients/update' => 'clients#update'
+  post 'companies/update' => 'companies#update'
 
   get 'companies/clients/:id' => 'clients#show' 
   
