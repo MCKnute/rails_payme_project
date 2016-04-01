@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *
  */
 
 @import "bootstrap-sprockets";
@@ -20,18 +21,20 @@ body {
   padding-bottom: 20px;
 }
 
+
+
 .jumbotron {
 	text-align: center
 }
 
-//#welcome_splash {
-//	color: white;
-//	font-weight: bold;
-//	background-image: url('splash_packing.jpg');
-//	background-size:     cover;                      
-//  background-repeat:   no-repeat;
-//    background-position: center center;
-//}
+#welcome_splash {
+	min-height: 450px;
+	font-weight: bold;
+	background-image: url('welcome_splash.jpg');
+	background-size:     cover;                      
+    background-repeat:   no-repeat;
+    background-position: center bottom;
+}
 
 footer {
 	text-align: center
@@ -56,13 +59,31 @@ footer {
 	letter-spacing: 1px;
 }
 
-#invoice_wrapper {
+
+
+.btn-print {
+	background-color: #AAA;
+	color: #FFF;
+}
+
+#print_wrapper {
 	border: 1px solid #CCC;
 	padding: 4em;
 	margin-top: 2em;
 }
 
-.btn-print {
-	background-color: #AAA;
-	color: #FFF;
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #print_wrapper, #print_wrapper * {
+    visibility: visible;
+  }
+  #print_wrapper {
+  	position: absolute;
+    left: 0;
+    top: 0;
+    border: 0;
+    width: 100%;
+  }
 }

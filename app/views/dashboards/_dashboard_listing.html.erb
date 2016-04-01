@@ -40,7 +40,7 @@
 					<input type='hidden' name='authenticity_token' value='<%= form_authenticity_token %>'>
 	                <button data-toggle="modal" data-target="#deleteInvoiceModal<%= client.id %>" type='submit' class="btn btn-sm btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Client</button>
 
-			<%= render partial: "dashboard_deleteinvoice", locals: { client: client } %>
+			<%= render partial: "dashboard_deleteClient", locals: { client: client } %>
 			<% end %>	
 	        </td>
 

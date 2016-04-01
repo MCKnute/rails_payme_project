@@ -2,11 +2,29 @@
   </div>
     <div class="jumbotron" id="welcome_splash">
       <div class="container">
-        <h1>PayME</h1>
-        <p>Easily track invoices and get paid with PayME. Join today!</p>
-        <p><a class="btn btn-primary btn-lg" href="/register" role="button">Register Now &raquo;</a></p>
+        <div class="row">
+          <div class="col-md-8">
+            <h1 style="font-weight: 900">PayME</h1>
+            <p>
+              Track clients.<br />
+              Create invoices.<br />
+              Get paid easily.<br />
+              
 
-        <!-- <p><a class="btn btn-default btn-lg" href="#" role="button">Log In &raquo;</a></p> -->
+              <% if session[:client_id] %>
+                </p>
+                <p><a class="btn btn-primary btn-lg" href="/clients" role="button">Back to Client Dashboard</a></p>
+              <% elsif session[:company_id] %>
+                </p>
+                <p><a class="btn btn-primary btn-lg" href="/companies" role="button">Back to Company Dashboard</a></p>
+              <% else %>
+                Join Today!</p>
+                <p><a class="btn btn-primary btn-lg" href="/register" role="button">Register Now &raquo;</a></p>
+              <% end %>
+
+            <!-- <p><a class="btn btn-default btn-lg" href="#" role="button">Log In &raquo;</a></p> -->
+          </div>
+        </div>
       </div>
     </div>
 

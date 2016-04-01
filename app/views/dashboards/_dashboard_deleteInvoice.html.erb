@@ -1,0 +1,39 @@
+<!-- Modal for "Delete New Invoice" -->
+<div class="modal fade" id="deleteInvoiceModal<%= paid.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Delete Invoice</h4>
+		    </div>
+		   
+		    <div class="modal-body">
+		    <!-- Error check -->
+		    <div class="has-error">
+			<% if flash[:errors] %>
+				<p class="bg-danger text-center" style="padding:1em; margin-bottom: 0; font-weight: bold">
+			        <% flash[:errors].each do |e| %>
+			          <%= e %> <br />
+			        <% end %>
+			    </p>
+		    <% end %>
+		    </div>
+
+	    		
+<div class="alert alert-danger">
+  <strong>Warning!</strong> Are you sure you want to delete invoice #<%= paid.id %> for <%= paid.client.name %>?
+</div>
+
+				<div class="modal-footer">
+		    <a href="">
+			    	<%= token_tag nil %>
+			    	<button type="submit" class="btn btn-warning center-block"> No <span aria-hidden="true"></span></button></a>
+	    	<form action="/invoices/<%= paid.id %>" method="post">
+			    	<%= token_tag nil %>
+					<input type="hidden" name="_method" value="delete">
+			    	<button type="submit" class="btn btn-danger center-block"> Yes <span class="glyphicon glyphicon" aria-hidden="true"></span></button>
+			    </div>
+		    </form>
+		</div>
+    </div>
+</div><!-- Modal End -->

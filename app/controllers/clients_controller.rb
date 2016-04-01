@@ -11,8 +11,8 @@ class ClientsController < ApplicationController
     else  
       @client = Client.find(params[:id])
     end
-    @out = Invoice.where(client_id: @client.id, paid_date: nil)
-    @paid = Invoice.where(client_id: @client.id).where.not(paid_date: nil)
+    @out = Invoice.where(client_id: @client.id, paid_date: nil).order(:due_by)
+    @paid = Invoice.where(client_id: @client.id).where.not(paid_date: nil).order(:paid_date)
   end
 
   def create
