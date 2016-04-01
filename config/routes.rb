@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'companies/edit' => 'companies#edit'
 
 
+
   #get '/companies/reports/1st' => 'reports#oneq'
   #get '/companies/reports/2nd' => 'reports#twoq'
   #get '/companies/reports/3rd' => 'reports#threeq'
@@ -41,13 +42,18 @@ Rails.application.routes.draw do
   get '/clients/reports/year/:id' => 'reports#year'
 
 
+  post 'invoices/:id/edit' => 'invoices#edit'
+  post 'invoices/update' => 'invoices#update'
 
   delete '/invoices/:id' => 'invoices#deleteInvoice'
   delete 'unpaid_invoices/:id' => 'invoice#deleteUnpaidInvoice'
 
+  
   get '/register' => 'companies#new', as: :this_new_company
 
+
   get 'clients/:id' => 'clients#show'
+
   delete '/sessions' => 'sessions#destroy'
   
   resources :sessions

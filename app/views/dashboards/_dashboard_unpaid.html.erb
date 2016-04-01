@@ -35,7 +35,12 @@
 			<td><%= number_to_currency(unpaid.amount) %></td>
 			<td class="text-right">
 				<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addCheck<%= unpaid.id %>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong>&#36;</strong> Record Check</button>
+
+				<form action="/invoices/<%= unpaid.id %>/edit" method="post" style="display: inline-block">
+				<%= token_tag nil %>
 				<button class="btn btn-primary btn-sm" data-toggle="edit_modal<%= unpaid.id %>" data-target="#Invoice<%= unpaid.id %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Invoice</button>
+				</form>
+
 				<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUnpaidInvoice<%= unpaid.id %>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Invoice</button>
 
 				<%= render partial: "dashboard_deleteUnpaidInvoice", locals: { unpaid: unpaid } %>
