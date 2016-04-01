@@ -10,74 +10,90 @@
   </ol>
 <% end %>
 
+<h1 class="text-center">Pay Invoice by Credit Card</h1>
 <%= form_tag charges_path do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <label class="amount">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Invoice Number</th>
-            <th>From</th>
-            <th>To</th>
-            <th>Description</th>
-            <th>Send Date</th>
-            <th>Due Date</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @invoice.id %></td>
-            <td>
-              <p><%= @invoice.client.name %></p>
-              <p><%= @invoice.client.address_line1 %></p>
-                <% if @invoice.client.address_line2 %>
-                    <p><%= @invoice.client.address_line2 %></h4>
-                <% end %>
-              <p>
-                <%= @invoice.client.city %>,
-                <%= @invoice.client.state %> 
-                <%= @invoice.client.zip %>
-              </p>
-            </td>
-            <td>
-              <p><%= @invoice.company.name %></p>
-              <p><%= @invoice.company.address_line1 %></p>
-                <% if @invoice.company.address_line2 %>
-                    <p><%= @invoice.company.address_line2 %></h4>
-                <% end %>
-              <p>
-                <%= @invoice.company.city %>,
-                <%= @invoice.company.state %> 
-                <%= @invoice.company.zip %>
-              </p>
-            </td>
-            <td><%= @invoice.description %></td>
-            <td><%= @invoice.sendDate.to_formatted_s(:mo_day_year) %></td>
-            <td><%= @invoice.due_by.to_formatted_s(:mo_day_year) %></td>
-            <td><%= number_to_currency@invoice.amount %></td>
-          </tr>   
-        </tbody>
-      </table>
-  </article>
-
-<form action="/charge" method="POST">
-  <!-- <%=token_tag nil %> -->
-  <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
-  <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
-  <script
-    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-    data-key="pk_test_SbFR02JMOJuev24sEKlekx4w"
-    data-image="https://cdn1.iconfinder.com/data/icons/real-estate-set-1/512/19-512.png"
-    data-name="PayME"
-    data-description="Amount: $<%=@invoice.amount%>"
-    data-amount=""
-    data-locale="auto">
-  </script>
-</form>
+  <div class="text-center">
+    <form action="/charge" method="POST" class="center-block">
+      <!-- <%=token_tag nil %> -->
+      <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
+      <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
+      <script
+        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+        data-key="pk_test_SbFR02JMOJuev24sEKlekx4w"
+        data-image="https://cdn1.iconfinder.com/data/icons/real-estate-set-1/512/19-512.png"
+        data-name="PayME"
+        data-description="Amount: $<%=@invoice.amount%>"
+        data-amount=""
+        data-locale="auto">
+      </script>
+    </form>
+  </div>
 <% end %>
+
+  <div id="print_wrapper" class="col-md-10 col-md-offset-1">
+  <h1 class="text-center">INVOICE</h1>
+
+  <div class="row" >
+    <div class="col-md-4" style="display:inline-block">
+      <h5>From:</h5>
+      <address>
+        <strong><%= @invoice.company.name %></strong><br />
+        <%= @invoice.company.address_line1 %><br />  
+        <% if @invoice.company.address_line2 != "" %>
+          <%= @invoice.company.address_line2 %><br />
+        <% end %>
+        <%= @invoice.company.city %>, <%= @invoice.company.state %> <%= @invoice.company.zip %><br />
+        <%= @invoice.company.email %><br /> 
+        <%= @invoice.company.phone %><br /> 
+      </address>
+    </div>
+
+    <div class="col-md-4" style="display: inline-block">
+      <h5>Bill To:</h5>
+      <address>
+        <strong><%= @invoice.client.name %></strong><br />
+        <%= @invoice.client.address_line1 %><br />  
+        <% if @invoice.client.address_line2 != "" %>
+          <%= @invoice.client.address_line2 %><br />
+        <% end %>
+        <%= @invoice.client.city %>, <%= @invoice.client.state %> <%= @invoice.client.zip %><br />
+      </address>
+    </div>
+
+    <div class="col-md-4" style="display:inline-block">
+      <h5 style="font-weight:bold">Invoice # <%= @invoice.id %></h5>
+      <strong>Send Date:</strong> <%= @invoice.sendDate.to_formatted_s(:long) %><br />
+      <strong>Due Date:</strong> <%= @invoice.due_by.to_formatted_s(:long) %><br />
+    </div>
+
+  </div>
+
+    <h4 class="text-center">Invoice Item</h4>
+
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table">
+          <thead>
+            <tr>
+              <th style="width: 80%; background-color: #CCC">Item Description</th>
+              <th style="width: 20%; background-color: #CCC">Total Price</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr>
+              <td><%= @invoice.description %></td>
+              <td><%= number_to_currency(@invoice.amount) %></td>
+            </tr>
+            <tr style="font-size: large; font-weight: bold">
+              <td class="text-right">TOTAL DUE:</td>
+              <td><%= number_to_currency(@invoice.amount) %></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5 class="text-center">Thank you for using <%= @invoice.company.name %></h5>
+      </div>
+    </div>
+  </div>
+</div>
