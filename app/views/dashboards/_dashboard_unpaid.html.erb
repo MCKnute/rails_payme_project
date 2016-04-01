@@ -34,16 +34,13 @@
 			<td><%= unpaid.client.name %></td>
 			<td>$<%= number_to_currency(unpaid.amount) %></td>
 			<td class="text-right">
-				<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addCheck<%= unpaid.id %>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong>&#36;</strong> Record Check
-				</button>
-				<button class="btn btn-primary btn-sm" data-toggle="edit_modal<%= unpaid.id %>" data-target="#Invoice<%= unpaid.id %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Invoice
-				</button>
-				<button class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Invoice
-				</button>
+				<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addCheck<%= unpaid.id %>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong>&#36;</strong> Record Check</button>
+				<button class="btn btn-primary btn-sm" data-toggle="edit_modal<%= unpaid.id %>" data-target="#Invoice<%= unpaid.id %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Invoice</button>
+				<button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteUnpaidInvoice<%= unpaid.id %>"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Delete Invoice</button>
 
-				<%= render partial: "dashboard_addCheck", locals: { unpaid: unpaid } %>
-
+				<%= render partial: "dashboard_deleteUnpaidInvoice", locals: { unpaid: unpaid } %>
 			</td>
+			<td><%= render partial: "dashboard_addCheck", locals: { unpaid: unpaid } %></td>
 		</tr>
 	</tbody>
 	<% end %>

@@ -11,6 +11,11 @@ class InvoicesController < ApplicationController
     end
   end
 
+  def deleteInvoice
+    Invoice.find(params[:id]).destroy
+    redirect_to '/companies'
+  end
+
   def show
     @invoice = Invoice.find(params[:id])
   end
