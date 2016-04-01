@@ -19,7 +19,7 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
 		<ul class="nav nav-pills">
-		  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly Earnings: </a></li>
+		  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly <%= @wording %>: </a></li>
 		  <li role="report_yearly"
 		  <% if params[:id].to_s == "2015"%>
 		  class="active" 
@@ -40,7 +40,7 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
 		<ul class="nav nav-pills">
-		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#"><%= params[:id] %> Quarterly Earnings: </a></li>
+		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#"><%= params[:id] %> Quarterly <%= @wording %>: </a></li>
 		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
 		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/2">2nd Quarter</a></li>
 		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/3">3rd Quarter</a></li>
@@ -61,7 +61,13 @@
 		<tr>
 			<th>Invoice #</th>
 			<th>Status</th>
-			<th>Client Name</th>
+			<th>
+				<% if session[:client_id] %>
+					Company Name
+				<% elsif session[:session_id] %>
+					Client Name
+				<% end %>
+			</th>
 			<th>Date Paid</th>
 			<th>Payment Info</th>
 			<th>Amount Paid</th>
@@ -83,7 +89,13 @@
 					<strong class="text-warning">Paid Late</strong>
 				<% end %>
 			</td>
-			<td><%= paid.client.name %></td>
+			<td>
+				<% if session[:client_id] %>
+					<%= paid.company.name %>
+				<% elsif session[:session_id] %>
+					<%= paid.client.name %>
+				<% end %>
+			</td>
 			<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
 			<td>
 				<% if paid.check_payment %>
@@ -96,7 +108,7 @@
 		</tr>
 		<% end %>
 		<tr>
-			<td colspan="5" class="text-right" style="font-size: large">Total Earnings: </td>
+			<td colspan="5" class="text-right" style="font-size: large">Total <%= @wording %>: </td>
 			<td style="font-weight: bold; font-size: large"><%= number_to_currency(@total) %></td>
 		</tr>
 	</tbody>

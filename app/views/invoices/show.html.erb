@@ -17,18 +17,23 @@
 
     <a href="#" onclick="window.print();return false;" class="btn btn-print btn-lg" type="button"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print Invoice</a>
 
-      <form action="/charges/new" style="display: inline-block">
-        <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
-        <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
-        <button type="submit" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pay By Credit Card</button>
-      </form>
-
+    <% if @invoice.paid_date == nil %>
       <% if session[:client_id] %>
+
+        <form action="/charges/new" style="display: inline-block">
+          <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
+          <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
+          <button type="submit" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pay By Credit Card</button>
+        </form>
+      <% end %>
+      
       <button class="btn btn-info btn-lg" 
         onclick="alert('Please print out your invoice and mail it to us with your check payment.');" 
       > <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Pay By Check</button>
-      <% end %>
+      
     </div>
+
+    <% end %>
   </div>
 
 <div id="print_wrapper" class="col-md-10 col-md-offset-1">
