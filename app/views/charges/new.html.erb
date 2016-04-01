@@ -58,16 +58,16 @@
               </p>
             </td>
             <td><%= @invoice.description %></td>
-            <td><%= @invoice.sendDate %></td>
-            <td><%= @invoice.due_by %></td>
-            <td>$<%= @invoice.amount %></td>
+            <td><%= @invoice.sendDate.to_formatted_s(:mo_day_year) %></td>
+            <td><%= @invoice.due_by.to_formatted_s(:mo_day_year) %></td>
+            <td><%= number_to_currency@invoice.amount %></td>
           </tr>   
         </tbody>
       </table>
   </article>
 
 <form action="/charge" method="POST">
-  <!-- <%=token_tag nil %> -->cccc
+  <!-- <%=token_tag nil %> -->
   <input type="hidden" name="invoice_id" value="<%= @invoice.id %>">
   <input type="hidden" name="invoice_amt" value="<%= @invoice.amount %>">
   <script
