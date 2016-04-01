@@ -1,5 +1,21 @@
 class InvoicesController < ApplicationController
 
+  def addCheck
+    @addCheck = Invoice.find(params[:id])
+    # @new_date = params[:paid_date[1i]].to_i+params[:paid_date[2i]].to_i+params[:paid_date[3i]].to_i
+    if @addCheck.update(check_payment: params[:check_number], paid_date: params[:date])
+      redirect_to '/companies'
+    else
+      flash[:errors] = @addCheck.errors.full_messages
+      redirect_to :back
+    end
+  end
+
+  def deleteInvoice
+    Invoice.find(params[:id]).destroy
+    redirect_to '/companies'
+  end
+
   def show
     @invoice = Invoice.find(params[:id])
   end
@@ -35,7 +51,7 @@ class InvoicesController < ApplicationController
     session.clear
     redirect_to :back
   end
-
+  
   private
     def invoice_params
       params.require(:invoice).permit(:client_id, :company_id, :sendDate, :due_by, :description, :amount, :paid_date)

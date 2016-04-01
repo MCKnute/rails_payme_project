@@ -1,0 +1,46 @@
+<!-- Modal for "Adding Check #"" -->
+<div class="modal fade" id="addCheck<%= unpaid.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	<div class="modal-dialog" role="document">
+	    <div class="modal-content">
+		    <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h4 class="modal-title" id="myModalLabel">Add Check</h4>
+		    </div>
+		   
+		    <div class="modal-body">
+		    <!-- Error check -->
+		    <div class="has-error">
+			<% if flash[:check_errors] %>
+				<p class="bg-danger text-center" style="padding:1em; margin-bottom: 0; font-weight: bold">
+			        <% flash[:errors].each do |e| %>
+			          <%= e %> <br />
+			        <% end %>
+			    </p>
+		    <% end %>
+		    </div>
+
+	    	<form action="/invoices/add/<%= unpaid.id %>" method="post">
+    		
+	    	<div class="form-horizontal">
+	    		<div class="form-group">
+	    			<label class="col-sm-3 control-label">Check #</label>
+		    		<div class="col-sm-8">
+                        <input class="form-control" name="check_number" />
+                    </div>
+	    		</div>
+	    	</div>
+
+	    	<input type="hidden" name="date" value="<%= Date.today %>">
+
+			<div class="modal-footer">
+		    <a href="">
+			    	<%= token_tag nil %>
+			    	<button type="submit" class="btn btn-warning center-block"> Cancel <span aria-hidden="true"></span></button></a>
+			    	<%= token_tag nil %>
+					<input type="hidden" name="_method" value="patch">
+			    	<button type="submit" class="btn btn-success center-block"> Add <span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+			    </div>
+		    </form>
+		</div>
+    </div>
+</div><!-- Modal End -->

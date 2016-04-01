@@ -2,10 +2,6 @@ Rails.application.routes.draw do
   
   root 'welcome#index'
 
-
-  # get 'clients' => 'clients#show'
-
-
   post 'clients/create' => 'clients#create'
   
   get 'clients' => 'clients#show'
@@ -21,6 +17,7 @@ Rails.application.routes.draw do
   get 'companies/clients/:id/edit' => 'clients#edit'
 
   post 'clients/update' => 'clients#update'
+  post 'companies/update' => 'companies#update'
 
   get 'companies/clients/:id' => 'clients#show' 
   
@@ -42,8 +39,8 @@ Rails.application.routes.draw do
   get '/companies/reports/quarter/:id/:id2' => 'reports#quarter'
   get '/companies/reports/year/:id' => 'reports#year'
 
-
-
+  delete '/invoices/:id' => 'invoices#deleteInvoice'
+  delete 'unpaid_invoices/:id' => 'invoice#deleteUnpaidInvoice'
 
   get '/register' => 'companies#new', as: :this_new_company
 
@@ -54,6 +51,9 @@ Rails.application.routes.draw do
   get '/companies' => 'dashboards#index', as: :companies_main
 
   get 'companies/destroy' => 'clients#destroy'
+
+  patch 'invoices/add/:id' => 'invoices#addCheck'
+
 
   # resources :clients
 

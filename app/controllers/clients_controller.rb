@@ -37,6 +37,7 @@ class ClientsController < ApplicationController
   def update
     client = Client.find(params[:client_id])
     if client.update(name: params[:name],
+                      email: params[:email],
                       address_line1: params[:address_line1],
                       address_line2: params[:address_line2],
                       city: params[:city], 

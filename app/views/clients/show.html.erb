@@ -22,10 +22,7 @@
 	<h4>Mailing Address:</h4>
 	<address>
 		<%= @client.name %><br />
-		<%= @client.address_line1 %><br />	
-		<% if @client.address_line2 %>
-			<%= @client.address_line2 %><br />
-		<% end %>
+		<%= @client.address_line1 + " " + @client.address_line2%><br />	
 		<%= @client.city %>, <%= @client.state %> <%= @client.zip %>
 	</address>
 
@@ -53,10 +50,10 @@
 			<% @out.each do |out| %>
 				<tr>
 					<td><a href="/clients/invoices/<%= out.id %>"><%= out.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> </a></td>
-					<td><%= out.sendDate%></td>
-					<td><%= out.due_by%></td>
+					<td><%= out.sendDate.to_formatted_s(:mo_day_year)%></td>
+					<td><%= out.due_by.to_formatted_s(:mo_day_year)%></td>
 					<td><%= out.description %></td>
-					<td>$<%= out.amount %></td>
+					<td><%= number_to_currency(out.amount) %></td>
 					<td class="text-right">
 						<form action="/charges/new" style="display: inline-block">
 							<input type="hidden" name="invoice_id" value="<%= out.id %>">
@@ -68,9 +65,6 @@
 						<% if session[:client_id] %>
 						  onclick="alert('Please print out your invoice and mail it to us with your check payment.');" 
 						  <% @folder_root = '/clients' %>
-						<% elsif session[:company_id] %>
-						  onclick="alert('Testing');"
-						  <% @folder_root = '/companies' %> 
 						<% end %> href="<%= @folder_root %>/invoices/<%=out.id %>" ><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Check</a>
 					</td>
 				</tr>
@@ -103,9 +97,9 @@
 			<% @paid.each do |paid| %>
 				<tr>
 					<td><a href="/clients/invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span> </a></td>
-					<td><%= paid.paid_date %></td>
+					<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
 					<td><%= paid.description %></td>
-					<td>$<%= paid.amount %></td>
+					<td><%= number_to_currency(paid.amount) %></td>
 					<td>
 						<% if paid.check_payment %>
 							<span class="label label-info">Check #:</span> <%= paid.check_payment %>

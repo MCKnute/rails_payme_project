@@ -1,10 +1,10 @@
 <!-- Modal for "Delete New Invoice" -->
-<div class="modal fade" id="deleteInvoiceModal<%= client.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade" id="deleteUnpaidInvoice<%= unpaid.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	<div class="modal-dialog" role="document">
 	    <div class="modal-content">
 		    <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		        <h4 class="modal-title" id="myModalLabel">Delete Client <%= client.name %></h4>
+		        <h4 class="modal-title" id="myModalLabel">Delete Invoice</h4>
 		    </div>
 		   
 		    <div class="modal-body">
@@ -18,23 +18,20 @@
 			    </p>
 		    <% end %>
 		    </div>
-		    <!-- Delete Client -->
-	    		<%= token_tag nil %>
-	    		<input type="hidden" name="invoice[client_id]" value="<%=client.id %>">
-	    		<input type="hidden" name="invoice[company_id]" value="<%=session[:company_id] %>">
+
 	    		
 <div class="alert alert-danger">
-  <strong>Warning!</strong> Deleting this will delete all invoices associated 
+  <strong>Warning!</strong> Are you sure you want to delete invoice #<%= unpaid.id %> for <%= unpaid.client.name %>?
 </div>
 
 				<div class="modal-footer">
 		    <a href="">
 			    	<%= token_tag nil %>
-			    	<button type="submit" class="btn btn-success center-block"> Cancel <span aria-hidden="true"></span></button></a>
-	    	<form action="/companies/clients/<%= client.id %>" method="post">
+			    	<button type="submit" class="btn btn-warning center-block"> No <span aria-hidden="true"></span></button></a>
+	    	<form action="/invoices/<%= unpaid.id %>" method="post">
 			    	<%= token_tag nil %>
 					<input type="hidden" name="_method" value="delete">
-			    	<button type="submit" class="btn btn-danger center-block"> Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
+			    	<button type="submit" class="btn btn-danger center-block"> Yes <span class="glyphicon glyphicon" aria-hidden="true"></span></button>
 			    </div>
 		    </form>
 		</div>
