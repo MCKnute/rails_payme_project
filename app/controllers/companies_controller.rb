@@ -24,6 +24,7 @@ class CompaniesController < ApplicationController
   def update
     company = Company.find(session[:company_id])
     if company.update(name: params[:name],
+                      email: params[:email],
                       address_line1: params[:address_line1],
                       address_line2: params[:address_line2],
                       city: params[:city], 
