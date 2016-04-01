@@ -22,10 +22,7 @@
 	<h4>Mailing Address:</h4>
 	<address>
 		<%= @client.name %><br />
-		<%= @client.address_line1 %><br />	
-		<% if @client.address_line2 %>
-			<%= @client.address_line2 %><br />
-		<% end %>
+		<%= @client.address_line1 + " " + @client.address_line2%><br />	
 		<%= @client.city %>, <%= @client.state %> <%= @client.zip %>
 	</address>
 
