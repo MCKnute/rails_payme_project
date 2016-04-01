@@ -6,50 +6,42 @@
 	</ol>
 <% end %>
 
+<div class="row">
+	<div class="col-md-8" style="font-size: larger">
+		<ul class="nav nav-pills">
+			  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly <%= @wording %>: </a></li>
+			  <li role="report_yearly"><a href="<%= @url_root %>reports/year/2015">2015</a></li>
+			  <li role="report_yearly"><a href="<%= @url_root %>reports/year/2016">2016</a></li>
+		</ul>
+	</div>
+</div>
 
+
+<div class="row">
+	<div class="col-md-8" style="font-size: larger">
+		<ul class="nav nav-pills">
+		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#"><%= params[:id] %> Quarterly <%= @wording %>: </a></li>
+		  <li role="report_quarterly" <% if params[:id2].to_s == "1"%>
+			  class="active" 
+			  <% end %> ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
+		  <li role="report_quarterly" <% if params[:id2].to_s == "2"%>
+			  class="active" 
+			  <% end %>><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/2">2nd Quarter</a></li>
+		  <li role="report_quarterly" <% if params[:id2].to_s == "3"%>
+			  class="active" 
+			  <% end %> ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/3">3rd Quarter</a></li>
+		  <li role="report_quarterly" <% if params[:id2].to_s == "4" %>
+			  class="active" 
+			  <% end %>><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/4">4th Quarter</a></li>
+		</ul>
+	</div>
+</div>
+<div id="print_reports">
 	<h1 class="text-center"><%= @current_user.name %></h1>
-	<h2 class="text-center">Quarter <%= params[:id2] %>, <%= params[:id]%> Report</h2>
-
-
-<div class="row">
-	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
-		<ul class="nav nav-pills">
-		  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly Earnings: </a></li>
-		  <li role="report_yearly"><a href="<%= @url_root %>reports/year/2015">2015</a></li>
-		  <li role="report_yearly"><a href="<%= @url_root %>reports/year/2016">2016</a></li>
-		</ul>
+	<h2 class="text-center">Quarter <%= params[:id2] %>, <%= params[:id] %> Report</h2>
+	<div class="row text-center glyph">
+		<a href="#" onclick="window.print();return false;" class="btn btn-print btn-lg glyph" type="button"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print Report</a>	
 	</div>
-</div>
-
-<div class="row">
-	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
-		<ul class="nav nav-pills">
-		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#"><%= params[:id] %> Quarterly Earnings: </a></li>
-		  <li role="report_quarterly"		  
-		  <% if params[:id2].to_s == "1" %>
-		  class="active" 
-		  <% end %>
-		  ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
-		  <li role="report_quarterly"
-		  <% if params[:id2].to_s == "2" %>
-		  class="active" 
-		  <% end %>
-		  ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/2">2nd Quarter</a></li>
-		  <li role="report_quarterly"
-		  <% if params[:id2].to_s == "3" %>
-		  class="active" 
-		  <% end %>
-		  ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/3">3rd Quarter</a></li>
-		  <li role="report_quarterly"
-		  <% if params[:id2].to_s == "4" %>
-		  class="active" 
-		  <% end %>
-		  ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/4">4th Quarter</a></li>
-		</ul>
-	</div>
-</div>
-
-
 
 <% if @invoices == [] %>
 	<h3 class="text-center">You currently have no paid invoices for this time period.</h3>
@@ -67,7 +59,7 @@
 	<tbody>
 		<% @invoices.each do |paid| %>
 		<tr>
-			<td><a href="<%= @url_root %>invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+			<td><a href="<%= @url_root %>invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in glyph" aria-hidden="true"></span></a></td>
 			<td><%= paid.client.name %></td>
 			<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
 			<td>
@@ -76,14 +68,18 @@
 				<% elsif paid.stripe_payment %>
 					<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
 				<% end %>
+		
 			</td>
 			<td><%= number_to_currency(paid.amount) %></td>
 		</tr>
 		<% end %>
-		<tr>
-			<td colspan="4" class="text-right" style="font-size: large">Total Earnings: </td>
-			<td style="font-weight: bold; font-size: large"><%= number_to_currency(@total) %></td>
-		</tr>
-	</tbody>
-</table>
-<% end %>
+			<tr>
+				<td colspan="4" class="text-right" style="font-size: large">Total Earnings: </td>
+				<td style="font-weight: bold; font-size: large"><%= number_to_currency(@total) %></td>
+			</tr>
+		</tbody>
+	</table>
+	<% end %>
+</div>
+
+

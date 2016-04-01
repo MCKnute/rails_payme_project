@@ -12,32 +12,27 @@
 	</ol>
 <% end %>
 
-	<h1 class="text-center"><%= @current_user.name %></h1>
-	<h2 class="text-center">Year <%= params[:id]%> Report</h2>
-
 <div class="row">
-	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
+	<div class="col-md-8" style="font-size: larger">
 		<ul class="nav nav-pills">
-		  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly <%= @wording %>: </a></li>
-		  <li role="report_yearly"
-		  <% if params[:id].to_s == "2015"%>
-		  class="active" 
-		  <% end %>
-		  ><a href="<%= @url_root %>reports/year/2015">2015</a></li>
-		  <li role="report_yearly"
-		  <% if params[:id].to_s == "2016"%>
-		  class="active" 
-		  <% end %>
-		  ><a href="<%= @url_root %>reports/year/2016">2016</a></li>
-
+			  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly <%= @wording %>: </a></li>
+			  <li role="report_yearly"
+			  <% if params[:id].to_s == "2015"%>
+			  class="active" 
+			  <% end %>
+			  ><a href="<%= @url_root %>reports/year/2015">2015</a></li>
+			  <li role="report_yearly"
+			  <% if params[:id].to_s == "2016"%>
+			  class="active" 
+			  <% end %>
+			  ><a href="<%= @url_root %>reports/year/2016">2016</a></li>
 		</ul>
 	</div>
-
 </div>
 
 
 <div class="row">
-	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
+	<div class="col-md-8" style="font-size: larger">
 		<ul class="nav nav-pills">
 		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#"><%= params[:id] %> Quarterly <%= @wording %>: </a></li>
 		  <li role="report_quarterly"><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
@@ -46,36 +41,35 @@
 		  <li role="report_quarterly"><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/4">4th Quarter</a></li>
 		</ul>
 	</div>
-
 </div>
+<div id="print_reports">
+	<h1 class="text-center"><%= @current_user.name %></h1>
+	<h2 class="text-center">Year <%= params[:id]%> Report</h2>
+
+	<div class="row text-center glyph">
+		<a href="#" onclick="window.print();return false;" class="btn btn-print btn-lg glyph" type="button"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print Report</a>	
+	</div>
 
 
-
-
-<% if @invoices == [] %>
-	<h3 class="text-center">You currently have no paid invoices for this time period.</h3>
-<% else %>
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>Invoice #</th>
-			<th>Status</th>
-			<th>
-				<% if session[:client_id] %>
-					Company Name
-				<% elsif session[:session_id] %>
-					Client Name
-				<% end %>
-			</th>
-			<th>Date Paid</th>
-			<th>Payment Info</th>
-			<th>Amount Paid</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @invoices.each do |paid| %>
-		<tr>
-			<td><a href="<%= @url_root %>invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+	<% if @invoices == [] %>
+		<h3 class="text-center">You currently have no paid invoices for this time period.</h3>
+	<% else %>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Invoice #</th>
+				<th>Status</th>
+				<th>Client Name</th>
+				<th>Date Paid</th>
+				<th>Payment Info</th>
+				<th>Amount Paid</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @invoices.each do |paid| %>
+			<tr>
+				
+			<td><a href="<%= @url_root %>invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" class="glyph" aria-hidden="true"></span></a></td>
 			<td>
 				<% if paid.paid_date < paid.due_by %>
 					<strong class="text-success">Paid On Time</strong>
@@ -107,4 +101,7 @@
 		</tr>
 	</tbody>
 </table>
-<% end %>
+
+	<% end %>
+</div>
+

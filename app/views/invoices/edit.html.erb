@@ -1,3 +1,12 @@
+<% if session[:company_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/companies">Company Dashboard</a></li>
+		<li class="active">Edit Invoice </li>
+	</ol>
+<% end %>
+
+
+
 <h1 class="text-center">Edit Invoice #<%= @invoice.id %> for client: <%= @invoice.client.name %></h1>
 
 <div class="row">
@@ -20,7 +29,7 @@
 				<input type="text" name="due" class="form-control" value="<%= @invoice.due_by.to_formatted_s(:month_day_year) %>">
 			</div>
 			<div class="form-group">
-				<button class="center-block btn btn-lg btn-warning">Update Client Info <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+				<button class="center-block btn btn-lg btn-success">Update Invoice <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
 			</div>
 		</form>
 	</div>

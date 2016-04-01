@@ -64,7 +64,6 @@ Rails.application.routes.draw do
 
   patch 'invoices/add/:id' => 'invoices#addCheck'
 
-
   # resources :clients
 
   resources :dashboards
