@@ -11,13 +11,12 @@
 	<h2 class="text-center">Quarter <%= params[:id2] %>, <%= params[:id]%> Report</h2>
 
 
-
 <div class="row">
 	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
 		<ul class="nav nav-pills">
 		  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly Earnings: </a></li>
-		  <li role="report_yearly"><a href="/companies/reports/year/2015">2015</a></li>
-		  <li role="report_yearly"><a href="/companies/reports/year/2016">2016</a></li>
+		  <li role="report_yearly"><a href="<%= @url_root %>reports/year/2015">2015</a></li>
+		  <li role="report_yearly"><a href="<%= @url_root %>reports/year/2016">2016</a></li>
 		</ul>
 	</div>
 </div>
@@ -30,22 +29,22 @@
 		  <% if params[:id2].to_s == "1" %>
 		  class="active" 
 		  <% end %>
-		  ><a href="/companies/reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
+		  ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
 		  <li role="report_quarterly"
 		  <% if params[:id2].to_s == "2" %>
 		  class="active" 
 		  <% end %>
-		  ><a href="/companies/reports/quarter/<%=params[:id] %>/2">2nd Quarter</a></li>
+		  ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/2">2nd Quarter</a></li>
 		  <li role="report_quarterly"
 		  <% if params[:id2].to_s == "3" %>
 		  class="active" 
 		  <% end %>
-		  ><a href="/companies/reports/quarter/<%=params[:id] %>/3">3rd Quarter</a></li>
+		  ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/3">3rd Quarter</a></li>
 		  <li role="report_quarterly"
 		  <% if params[:id2].to_s == "4" %>
 		  class="active" 
 		  <% end %>
-		  ><a href="/companies/reports/quarter/<%=params[:id] %>/4">4th Quarter</a></li>
+		  ><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/4">4th Quarter</a></li>
 		</ul>
 	</div>
 </div>
@@ -68,12 +67,7 @@
 	<tbody>
 		<% @invoices.each do |paid| %>
 		<tr>
-			<% if session[:client_id] %>
-				<% @url_root = "/clients/invoices/" %>
-			<% elsif session[:session_id] %>
-				<% @url_root = "/companies/invoices/" %>
-			<% end %>
-			<td><a href="<%= @url_root %><%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+			<td><a href="<%= @url_root %>invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
 			<td><%= paid.client.name %></td>
 			<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
 			<td>

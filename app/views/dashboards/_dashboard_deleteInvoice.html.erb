@@ -27,14 +27,14 @@
 			<div class="modal-footer">
 		    
 			    
-		    	<form action="/invoices/<%= paid.id %>" method="post">
+		    	<form action="/invoices/<%= paid.id %>" method="post" style="display: inline-block" >
 			    	<%= token_tag nil %>
 					<input type="hidden" name="_method" value="delete">
 
 			    	<button type="submit" class="btn btn-danger">Yes<span class="glyphicon glyphicon" aria-hidden="true"></span></button>
 			    </form>
 
-			    <button type="submit" class="btn btn-warning">No (Cancel)<span aria-hidden="true"></span></button>
+			    <button type="submit" class="btn btn-default">No (Cancel)<span aria-hidden="true"></span></button>
 
 		    </div>
 		</div>

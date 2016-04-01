@@ -23,20 +23,22 @@
 	    		<input type="hidden" name="invoice[client_id]" value="<%=client.id %>">
 	    		<input type="hidden" name="invoice[company_id]" value="<%=session[:company_id] %>">
 	    		
-<div class="alert alert-danger">
-  <strong>Warning!</strong> Deleting this will delete all associated invoices 
+<div class="alert alert-danger text-center">
+  <strong><span class="glyphicon glyphicon-alert" aria-hidden="true">Warning!</strong> Deleting this will delete the client and all associated invoices.<br />
+  Do you really want to do this?<br />
+  This CANNOT be undone! 
 </div>
 
-				<div class="modal-footer">
-		    <a href="">
-			    	<%= token_tag nil %>
-			    	<button type="submit" class="btn btn-warning center-block"> Cancel <span aria-hidden="true"></span></button></a>
-	    	<form action="/companies/clients/<%= client.id %>" method="post">
-			    	<%= token_tag nil %>
-					<input type="hidden" name="_method" value="delete">
-			    	<button type="submit" class="btn btn-danger center-block"> Delete <span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>
-			    </div>
-		    </form>
+			<div class="modal-footer">
+
+			    	
+		    	<form action="/companies/clients/<%= client.id %>" method="post" style="display: inline-block">
+				    	<%= token_tag nil %>
+						<input type="hidden" name="_method" value="delete">
+				    	<button type="submit" class="btn btn-danger"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> Yes</button>
+			    </form>
+			    <button type="submit" class="btn btn-default"> No (Cancel) <span aria-hidden="true"></span></button>
+		    </div>
 		</div>
     </div>
 </div><!-- Modal End -->

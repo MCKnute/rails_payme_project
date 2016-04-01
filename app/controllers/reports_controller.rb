@@ -57,9 +57,11 @@ class ReportsController < ApplicationController
     if session[:company_id]
       @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date) 
       @wording = "Earnings"
+      @url_root = "/companies/"
     elsif session[:client_id]
       @invoices = Invoice.where(client_id: session[:client_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date)
       @wording = "Payments"
+      @url_root = "/clients/"
     end 
     @total = @invoices.sum(:amount)
   end
@@ -88,9 +90,11 @@ class ReportsController < ApplicationController
     if session[:company_id]
       @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date).order(:paid_date) 
       @wording = "Earnings"
+      @url_root = "/companies/"
     elsif session[:client_id]
       @invoices = Invoice.where(client_id: session[:client_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date).order(:paid_date) 
       @wording = "Payments"
+      @url_root = "/clients/"
     end
 
     @total = @invoices.sum(:amount)

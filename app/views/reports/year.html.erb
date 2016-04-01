@@ -15,7 +15,6 @@
 	<h1 class="text-center"><%= @current_user.name %></h1>
 	<h2 class="text-center">Year <%= params[:id]%> Report</h2>
 
-
 <div class="row">
 	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
 		<ul class="nav nav-pills">
@@ -24,12 +23,12 @@
 		  <% if params[:id].to_s == "2015"%>
 		  class="active" 
 		  <% end %>
-		  ><a href="/companies/reports/year/2015">2015</a></li>
+		  ><a href="<%= @url_root %>reports/year/2015">2015</a></li>
 		  <li role="report_yearly"
 		  <% if params[:id].to_s == "2016"%>
 		  class="active" 
 		  <% end %>
-		  ><a href="/companies/reports/year/2016">2016</a></li>
+		  ><a href="<%= @url_root %>reports/year/2016">2016</a></li>
 
 		</ul>
 	</div>
@@ -41,10 +40,10 @@
 	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
 		<ul class="nav nav-pills">
 		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#"><%= params[:id] %> Quarterly <%= @wording %>: </a></li>
-		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
-		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/2">2nd Quarter</a></li>
-		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/3">3rd Quarter</a></li>
-		  <li role="report_quarterly"><a href="/companies/reports/quarter/<%=params[:id] %>/4">4th Quarter</a></li>
+		  <li role="report_quarterly"><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/1">1st Quarter</a></li>
+		  <li role="report_quarterly"><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/2">2nd Quarter</a></li>
+		  <li role="report_quarterly"><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/3">3rd Quarter</a></li>
+		  <li role="report_quarterly"><a href="<%= @url_root %>reports/quarter/<%=params[:id] %>/4">4th Quarter</a></li>
 		</ul>
 	</div>
 
@@ -76,12 +75,7 @@
 	<tbody>
 		<% @invoices.each do |paid| %>
 		<tr>
-			<% if session[:client_id] %>
-				<% @url_root = "/clients/invoices/" %>
-			<% elsif session[:session_id] %>
-				<% @url_root = "/companies/invoices/" %>
-			<% end %>
-			<td><a href="<%= @url_root %><%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+			<td><a href="<%= @url_root %>invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
 			<td>
 				<% if paid.paid_date < paid.due_by %>
 					<strong class="text-success">Paid On Time</strong>
