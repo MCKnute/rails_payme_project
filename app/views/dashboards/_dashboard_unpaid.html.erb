@@ -18,9 +18,6 @@
 		<tr>
 		<% @unpaidvoices.each do |unpaid| %></td>
 			<td><a href="companies/invoices/<%= unpaid.id %>"><%= unpaid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
-			<td><%= unpaid.sendDate.to_formatted_s(:mo_day_year) %></td>
-			<td><%= unpaid.client.name %></td>
-			<td><%= unpaid.due_by.to_formatted_s(:mo_day_year) %></td>
 			<td>
 				<% if Date.today < unpaid.sendDate %>
 					<strong class="text-muted">Not Sent</strong>
@@ -32,7 +29,10 @@
 					<strong class="text-warning">Due Today</strong>
 				<% end %>
 			</td>
-			<td>$<%= number_to_currency(unpaid.amount) %></td>
+			<td><%= unpaid.client.name %></td>
+			<td><%= unpaid.sendDate.to_formatted_s(:mo_day_year) %></td>
+			<td><%= unpaid.due_by.to_formatted_s(:mo_day_year) %></td>
+			<td><%= number_to_currency(unpaid.amount) %></td>
 			<td class="text-right">
 				<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addCheck<%= unpaid.id %>"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span><strong>&#36;</strong> Record Check</button>
 				<button class="btn btn-primary btn-sm" data-toggle="edit_modal<%= unpaid.id %>" data-target="#Invoice<%= unpaid.id %>"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit Invoice</button>
