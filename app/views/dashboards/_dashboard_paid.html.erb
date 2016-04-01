@@ -28,7 +28,7 @@
 			</td>
 			<td><%= paid.client.name %></td>
 			<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
-			<td>$<%= number_to_currency(paid.amount) %></td>
+			<td><%= number_to_currency(paid.amount) %></td>
 
 			<td>
 				<% if paid.check_payment %>
