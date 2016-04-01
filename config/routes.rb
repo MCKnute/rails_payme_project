@@ -26,7 +26,7 @@ Rails.application.routes.draw do
 
   get 'companies/edit' => 'companies#edit'
 
-
+  get 'clients/:id/edit' => 'clients#edit'
 
   #get '/companies/reports/1st' => 'reports#oneq'
   #get '/companies/reports/2nd' => 'reports#twoq'

@@ -51,7 +51,11 @@
 				<input type="text" name="phone" class="form-control" value="<%= @client.phone%>">
 			</div>
 			<div class="form-group">
+				<% if session[:company_id]%>
 				<button class="center-block btn btn-lg btn-warning">Update Client Info <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+				<% elsif session[:client_id]%>
+				<button class="center-block btn btn-lg btn-warning">Update Info <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+				<% end %>
 			</div>
 		</form>
 	</div>
