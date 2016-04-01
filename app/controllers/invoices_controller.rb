@@ -16,6 +16,10 @@ class InvoicesController < ApplicationController
     redirect_to '/companies'
   end
 
+  def edit
+    @invoice = Invoice.find(params[:id])
+  end
+
   def show
     @invoice = Invoice.find(params[:id])
   end
@@ -35,14 +39,14 @@ class InvoicesController < ApplicationController
   def update
   	# the below updates invoice to be paid via updating stripe_payment(or check_payment) and paid_date
   	# Invoice.update(4, :stripe_payment=> "222sd2g34234",:paid_date => Time.now.to_s(:db))
-  	@invoice = Invoice.find(params[:id])
+  	invoice = Invoice.find(params[:invoice_id])
 
-  	if @invoice.update(invoice_params)
+  	if invoice.update(amount: params[:amt], description: params[:description], due_by: params[:due])
   		flash[:success] = "Your invoice has been updated"
   		# change the redirect_to to be after clients
-  		redirect_to "/clients"
+  		redirect_to "/companies"
   	else
-  		flash[:errors] = @invoice.errors.full_messages
+  		flash[:errors] = invoice.errors.full_messages
   		redirect_to :back
   	end
   end		
