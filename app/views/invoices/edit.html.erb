@@ -1,0 +1,27 @@
+<h1 class="text-center">Edit Invoice #<%= @invoice.id %> for client: <%= @invoice.client.name %></h1>
+
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+
+		<form action="/invoices/update" method="post">
+			<%= token_tag nil %>
+			<input type="hidden" name="invoice_id" class="form-control" value="<%= @invoice.id %>">
+			<div class="form-group">
+			<label>Amount: </label>
+				<input type="float" name="amt" step="0.01" class="form-control" value="<%= @invoice.amount %>">
+			</div>
+			<div class="form-group">
+			<label>Description: </label>
+				<input type="text" name="description" class="form-control" value="<%= @invoice.description %>">
+			</div>
+			<div class="form-group">
+				<label>Due Date: </label>
+
+				<input type="text" name="due" class="form-control" value="<%= @invoice.due_by.to_formatted_s(:month_day_year) %>">
+			</div>
+			<div class="form-group">
+				<button class="center-block btn btn-lg btn-warning">Update Client Info <span class="glyphicon glyphicon-edit" aria-hidden="true"></span></button>
+			</div>
+		</form>
+	</div>
+</div>

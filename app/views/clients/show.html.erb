@@ -18,12 +18,24 @@
 
 	<%= @client.name %></h1>
 
+	<% if session[:client_id] %>
+	  <div class="row">
+	  	<div class="col-md-12 text-center">
+			<a href="/clients/<%= @client.id %>/edit" class="btn btn-lg btn-primary"><span class="glyphicon glyphicon-edit" aria-hidden="true"></span> Edit My Info</a> 
+
+			<a href="/clients/reports" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-stats" aria-hidden="true"></span> Reports</a> 
+		</div>
+	  </div>
+	<% end %>
+
 	<h4>Mailing Address:</h4>
 	<address>
 		<%= @client.name %><br />
 		<%= @client.address_line1 + " " + @client.address_line2%><br />	
 		<%= @client.city %>, <%= @client.state %> <%= @client.zip %>
 	</address>
+
+
 
 	<% if session[:company_id] %>
 		<h3>Outstanding Invoices</h3>

@@ -20,20 +20,23 @@
 		    </div>
 
 	    		
-<div class="alert alert-danger">
+<div class="alert alert-danger text-center">
   <strong>Warning!</strong> Are you sure you want to delete invoice #<%= paid.id %> for <%= paid.client.name %>?
 </div>
 
-				<div class="modal-footer">
-		    <a href="">
-			    	<%= token_tag nil %>
-			    	<button type="submit" class="btn btn-warning center-block"> No <span aria-hidden="true"></span></button></a>
-	    	<form action="/invoices/<%= paid.id %>" method="post">
+			<div class="modal-footer">
+		    
+			    
+		    	<form action="/invoices/<%= paid.id %>" method="post">
 			    	<%= token_tag nil %>
 					<input type="hidden" name="_method" value="delete">
-			    	<button type="submit" class="btn btn-danger center-block"> Yes <span class="glyphicon glyphicon" aria-hidden="true"></span></button>
-			    </div>
-		    </form>
+
+			    	<button type="submit" class="btn btn-danger">Yes<span class="glyphicon glyphicon" aria-hidden="true"></span></button>
+			    </form>
+
+			    <button type="submit" class="btn btn-warning">No (Cancel)<span aria-hidden="true"></span></button>
+
+		    </div>
 		</div>
     </div>
 </div><!-- Modal End -->

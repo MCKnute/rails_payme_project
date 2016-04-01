@@ -8,7 +8,6 @@ Rails.application.routes.draw do
 
   get 'companies/clients/new' => 'clients#new'
 
-  get 'clients/:id' => 'clients#show'
 
   delete 'companies/clients/:id' => 'clients#destroy'
 
@@ -27,22 +26,33 @@ Rails.application.routes.draw do
 
   get 'companies/edit' => 'companies#edit'
 
+  get 'clients/:id/edit' => 'clients#edit'
+
+  #get '/companies/reports/1st' => 'reports#oneq'
+  #get '/companies/reports/2nd' => 'reports#twoq'
+  #get '/companies/reports/3rd' => 'reports#threeq'
+  #get '/companies/reports/4th' => 'reports#fourq'
+
   get '/companies/reports' => 'reports#year'
-
-  get '/companies/reports/1st' => 'reports#oneq'
-  get '/companies/reports/2nd' => 'reports#twoq'
-  get '/companies/reports/3rd' => 'reports#threeq'
-  get '/companies/reports/4th' => 'reports#fourq'
-
-
-
   get '/companies/reports/quarter/:id/:id2' => 'reports#quarter'
   get '/companies/reports/year/:id' => 'reports#year'
+
+  get '/clients/reports' => 'reports#year'
+  get '/clients/reports/quarter/:id/:id2' => 'reports#quarter'
+  get '/clients/reports/year/:id' => 'reports#year'
+
+
+  post 'invoices/:id/edit' => 'invoices#edit'
+  post 'invoices/update' => 'invoices#update'
 
   delete '/invoices/:id' => 'invoices#deleteInvoice'
   delete 'unpaid_invoices/:id' => 'invoice#deleteUnpaidInvoice'
 
+  
   get '/register' => 'companies#new', as: :this_new_company
+
+
+  get 'clients/:id' => 'clients#show'
 
   delete '/sessions' => 'sessions#destroy'
   

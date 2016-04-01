@@ -53,7 +53,14 @@ class ReportsController < ApplicationController
     end
     @startdate = params[:id]+"-01-01"
     @enddate = params[:id]+"-12-31"
-    @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date) 
+
+    if session[:company_id]
+      @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date) 
+      @wording = "Earnings"
+    elsif session[:client_id]
+      @invoices = Invoice.where(client_id: session[:client_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date)
+      @wording = "Payments"
+    end 
     @total = @invoices.sum(:amount)
   end
 
@@ -77,7 +84,15 @@ class ReportsController < ApplicationController
       @enddate = params[:id]+"-03-31"
       params[:id2] = "1"
     end
-    @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date).order(:paid_date) 
+
+    if session[:company_id]
+      @invoices = Invoice.where(company_id: session[:company_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date).order(:paid_date) 
+      @wording = "Earnings"
+    elsif session[:client_id]
+      @invoices = Invoice.where(client_id: session[:client_id]).where('paid_date BETWEEN ? AND ?', @startdate.to_date, @enddate.to_date).order(:paid_date) 
+      @wording = "Payments"
+    end
+
     @total = @invoices.sum(:amount)
   end
 
