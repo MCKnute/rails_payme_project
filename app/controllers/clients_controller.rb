@@ -12,7 +12,7 @@ class ClientsController < ApplicationController
       @client = Client.find(params[:id])
     end
     @out = Invoice.where(client_id: @client.id, paid_date: nil)
-    @paid = Invoice.where(client_id: @client.id).where.not(paid_date: nil)  
+    @paid = Invoice.where(client_id: @client.id).where.not(paid_date: nil)
   end
 
   def create

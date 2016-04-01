@@ -31,22 +31,6 @@ class InvoicesController < ApplicationController
   	end
   end		
 
-  def show
-    @invoice = Invoice.all
-    respond_to do |format|
-      format.html
-      format.pdf do
-        pdf = Prawn::Document.new
-        # pdf = InvoicePdf.new(@invoice, view_context)
-        pdf.text "Hello!"
-        send_data pdf.render, filename:
-        "invoice.pdf",
-        type: "application/pdf"
-      end
-    end
-  end
-
-
   def destroy
     session.clear
     redirect_to :back
