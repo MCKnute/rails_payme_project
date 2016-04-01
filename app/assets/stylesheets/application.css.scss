@@ -86,4 +86,27 @@ footer {
     border: 0;
     width: 100%;
   }
+
+  a[href]:after {
+    content: none !important;
+  }
+
+	#glyph{
+	    display:none;
+	}
+
+
+  #print_reports, #print_reports * {
+    visibility: visible;
+  }
+
+  #print_reports {
+  	position: absolute;
+    left: 0;
+    top: 0;
+    border: 0;
+    width: 100%;
+  }
+
+ 
 }

@@ -6,14 +6,8 @@
 	</ol>
 <% end %>
 
-
-	<h1 class="text-center"><%= @current_user.name %></h1>
-	<h2 class="text-center">Quarter <%= params[:id2] %>, <%= params[:id]%> Report</h2>
-
-
-
 <div class="row">
-	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
+	<div class="col-md-8" style="font-size: larger">
 		<ul class="nav nav-pills">
 		  <li role="report_yearly" class='disabled' style="min-width: 215px"><a href="#">Yearly Earnings: </a></li>
 		  <li role="report_yearly"><a href="/companies/reports/year/2015">2015</a></li>
@@ -23,7 +17,7 @@
 </div>
 
 <div class="row">
-	<div class="col-md-8 col-md-offset-2" style="font-size: larger">
+	<div class="col-md-8" style="font-size: larger">
 		<ul class="nav nav-pills">
 		  <li role="report_quarterly" class="disabled" style="min-width: 215px"><a href="#"><%= params[:id] %> Quarterly Earnings: </a></li>
 		  <li role="report_quarterly"		  
@@ -50,46 +44,51 @@
 	</div>
 </div>
 
+<div id="print_reports">
+	<h1 class="text-center"><%= @current_user.name %></h1>
+	<h2 class="text-center">Quarter <%= params[:id2] %>, <%= params[:id]%> Report</h2>
 
-
-<% if @invoices == [] %>
-	<h3 class="text-center">You currently have no paid invoices for this time period.</h3>
-<% else %>
-<table class="table table-hover">
-	<thead>
-		<tr>
-			<th>Invoice #</th>
-			<th>Client Name</th>
-			<th>Date Paid</th>
-			<th>Payment Info</th>
-			<th>Amount Paid</th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @invoices.each do |paid| %>
-		<tr>
-			<% if session[:client_id] %>
-				<% @url_root = "/clients/invoices/" %>
-			<% elsif session[:session_id] %>
-				<% @url_root = "/companies/invoices/" %>
-			<% end %>
-			<td><a href="<%= @url_root %><%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
-			<td><%= paid.client.name %></td>
-			<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
-			<td>
-				<% if paid.check_payment %>
-					<span class="label label-info">Check #:</span> <%= paid.stripe_payment %>
-				<% elsif paid.stripe_payment %>
-					<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
+	<% if @invoices == [] %>
+		<h3 class="text-center">You currently have no paid invoices for this time period.</h3>
+	<% else %>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>Invoice #</th>
+				<th>Client Name</th>
+				<th>Date Paid</th>
+				<th>Payment Info</th>
+				<th>Amount Paid</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% @invoices.each do |paid| %>
+			<tr>
+				<% if session[:client_id] %>
+					<% @url_root = "/clients/invoices/" %>
+				<% elsif session[:session_id] %>
+					<% @url_root = "/companies/invoices/" %>
 				<% end %>
-			</td>
-			<td><%= number_to_currency(paid.amount) %></td>
-		</tr>
-		<% end %>
-		<tr>
-			<td colspan="4" class="text-right" style="font-size: large">Total Earnings: </td>
-			<td style="font-weight: bold; font-size: large"><%= number_to_currency(@total) %></td>
-		</tr>
-	</tbody>
-</table>
-<% end %>
+				<td><a href="<%= @url_root %><%= paid.id %>"><%= paid.id %> <span id="glyph" class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
+				<td><%= paid.client.name %></td>
+				<td><%= paid.paid_date.to_formatted_s(:mo_day_year) %></td>
+				<td>
+					<% if paid.check_payment %>
+						<span class="label label-info">Check #:</span> <%= paid.stripe_payment %>
+					<% elsif paid.stripe_payment %>
+						<span class="label label-info">Stripe ID:</span> <%= paid.stripe_payment %>
+					<% end %>
+				</td>
+				<td><%= number_to_currency(paid.amount) %></td>
+			</tr>
+			<% end %>
+			<tr>
+				<td colspan="4" class="text-right" style="font-size: large">Total Earnings: </td>
+				<td style="font-weight: bold; font-size: large"><%= number_to_currency(@total) %></td>
+			</tr>
+		</tbody>
+	</table>
+	<% end %>
+</div>
+
+<a href="#" onclick="window.print();return false;" class="btn btn-print btn-md" type="button"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print Report</a>	
