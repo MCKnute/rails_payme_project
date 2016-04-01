@@ -23,13 +23,11 @@
         <button type="submit" class="btn btn-info btn-lg"><span class="glyphicon glyphicon-credit-card" aria-hidden="true"></span> Pay By Credit Card</button>
       </form>
 
-      <button class="btn btn-info btn-lg" 
       <% if session[:client_id] %>
+      <button class="btn btn-info btn-lg" 
         onclick="alert('Please print out your invoice and mail it to us with your check payment.');" 
-      <% elsif session[:company_id] %>
-        onclick="alert('Testing');" 
-      <% end %>
       > <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Pay By Check</button>
+      <% end %>
     </div>
   </div>
 

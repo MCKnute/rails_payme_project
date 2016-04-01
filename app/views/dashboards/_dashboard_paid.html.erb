@@ -20,7 +20,7 @@
 		<tr>
 			<td><a href="companies/invoices/<%= paid.id %>"><%= paid.id %> <span class="glyphicon glyphicon-zoom-in" aria-hidden="true"></span></a></td>
 			<td>
-				<% if paid.paid_date < paid.due_by %>
+				<% if paid.paid_date <= paid.due_by %>
 					<strong class="text-success">Paid On Time</strong>
 				<% elsif paid.paid_date > paid.due_by %>
 					<strong class="text-warning">Paid Late</strong>

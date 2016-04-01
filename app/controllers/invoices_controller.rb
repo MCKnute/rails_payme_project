@@ -1,7 +1,7 @@
 class InvoicesController < ApplicationController
 
   def addCheck
-    @addCheck = Invoice.find_by(client: Client.find(params[:id]))
+    @addCheck = Invoice.find(params[:id])
     # @new_date = params[:paid_date[1i]].to_i+params[:paid_date[2i]].to_i+params[:paid_date[3i]].to_i
     if @addCheck.update(check_payment: params[:check_number], paid_date: params[:date])
       redirect_to '/companies'

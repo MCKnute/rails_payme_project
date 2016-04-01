@@ -3,7 +3,7 @@ class Invoice < ActiveRecord::Base
   belongs_to :company
 
   validates :client_id, :company_id, :description, :sendDate, :due_by, :amount, :presence => true
-  validate :date_present_only
+  validate :date_present_only, :on => :create
   validate :date_validation
 
   def date_present_only
