@@ -4,6 +4,12 @@
 		<li><a href="/companies/reports">Reports</a></li>
 		<li class="active">Quarter <%=params[:id2]%>, <%= params[:id] %></li>
 	</ol>
+<% elsif session[:client_id] %>
+	<ol class="breadcrumb">
+		<li><a href="/clients">Client Dashboard</a></li>
+		<li><a href="/clients/reports">Reports</a></li>
+		<li class="active">Quarter <%=params[:id2]%>, <%= params[:id] %></li>
+	</ol>
 <% end %>
 
 <div class="row">
