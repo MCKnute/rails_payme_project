@@ -1,4 +1,4 @@
-This is a basic Ruby on Rails web app for invoices, completed from start to finish within 4 1/2 days. All team members had only 3 weeks of intensive training on Ruby and RoR before starting this project. 
+This is a basic Ruby on Rails web app for invoices and earnings reports, completed from start to finish within 4 1/2 days. All team members had only 3 weeks of intensive training on Ruby and RoR before starting this project. 
 
 Team members and roles:
 - <a href="https://github.com/MCKnute">Mollie Knute</a> - Team lead, idea inception, database and front-end design, at-large merging and troubleshooting, URL-paramatization of reports
