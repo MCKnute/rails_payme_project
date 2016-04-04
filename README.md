@@ -1,15 +1,18 @@
-This is a very basic Ruby on Rails template, utilizing PostgreSQL for the database and Bootstrap with SASS for the front end. 
+This is a basic Ruby on Rails web app for invoices, completed from start to finish within 4 1/2 days. All team members had only 3 weeks of intensive training on Ruby and RoR before starting this project. 
 
-Also includes one controller called Welcome.
+Team members and roles:
+Mollie Knute - Team lead, idea inception, database and front-end design, at-large merging and troubleshooting, URL-paramatization of reports
+Ryan Reyes - Stripe API integration, heavy research into Prawn gem (ultimately not integrated into project)
+Peter Kang - Reports functionality
+Garrick Kwong - Company dashboard, CRUD functionality using Bootstrap modals
 
-Note that /app/assets/stylesheets/welcome.scss contains the body padding for the Jumbotron; all controllers using the Jumbotron should have that body padding code.
+Thank you CodingDojo for providing us with the training and opportunity to do this exciting project!
 
-Instructions source: 
-https://launchschool.com/blog/integrating-rails-and-bootstrap-part-1
 
-Rails v. 4.2.6
+Versions used:
 
-Ruby v. 2.2.1p85
-
-Bootstrap v. 3.2.0
+- Rails v. 4.2.6
+- Ruby v. 2.2.1p85
+- PostgreSQL v. 9.3.11
+- Bootstrap v. 3.2.0
 
